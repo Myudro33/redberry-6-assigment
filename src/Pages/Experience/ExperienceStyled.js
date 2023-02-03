@@ -1,35 +1,54 @@
 import styled from "styled-components";
 
+export const AboutExperience = styled.p`
+  font-size: 16px;
+  color: #000000;
+  margin: 20px 0px;
+`;
 
+export const ExperienceDate = styled.p`
+  color: #909090;
+  font-size: 16px;
+`;
 
+export const ExperienceTitle = styled.p`
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 500;
+`;
 
+export const ExperienceContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
 
 export const AbsoluteImage = styled.img`
- width: 42px;
- height: 42px;
- position: absolute;
- bottom: 40px;
-`
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  bottom: 40px;
+`;
 
 export const PersonalImage = styled.img`
- width: 246px;
- height: 246px;
- border-radius: 50%;
- border: 1px solid black;
-`
+  width: 246px;
+  height: 246px;
+  border-radius: 50%;
+  border: 1px solid black;
+`;
 export const AboutMySelf = styled.p`
-font-size: 16px;
- color: #000000;
- width: 430px;
-`
+  font-size: 16px;
+  color: #000000;
+  width: 430px;
+`;
 
 export const Contact = styled.p`
- color: #1A1A1A;
- font-size: 18px;
- display: flex;
- align-items:center;
- margin: 5px 0px;
-`
+  color: #1a1a1a;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin: 5px 0px;
+`;
 
 export const NameTitle = styled.h1`
   color: #f93b1d;
@@ -54,23 +73,27 @@ export const PersonalContainer = styled.div`
 
 export const RightContainer = styled.div`
   width: 822px;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 80px 50px;
 `;
 
-//  მარცხენა მხარე !!!
-
-
-
+// მარცხენა მხარე
 
 export const NavigationContainer = styled.div`
-width: 100%;
-display: flex;
-justify-content: flex-end;
-margin-top: 130px;
-`
+  width: 100%;
+  display: flex;
+  height: 48px;
+  justify-content: space-between;
+  margin: 135px 0px;
+`;
+
+export const Hr = styled.hr`
+  width: 100%;
+  margin: 30px 0px;
+  border: 1px solid #c1c1c1;
+`;
 
 export const Textarea = styled.textarea`
   width: 100%;
@@ -78,23 +101,17 @@ export const Textarea = styled.textarea`
   margin: 5px 0px;
   border: 1px solid #bcbcbc;
   resize: none;
-  border-radius: 4px;
   padding: 10px;
+  border-radius: 4px;
   &::placeholder {
     color: #00000060;
   }
 `;
 
-export const FileTitle = styled.h1`
-  color: #1a1a1a;
-  font-size: 18px;
-  font-weight: 500;
-`;
-export const FileUploadContainer = styled.div`
+export const DateContainer = styled.div`
   width: 100%;
-  height: 20px;
-  margin-top: 30px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -122,14 +139,7 @@ export const Label = styled.label`
   flex-direction: column;
   font-size: 16px;
   font-weight: 600;
-`;
-
-export const NameContainer = styled.div`
-  width: 100%;
-  height: 122px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin: 15px 0px;
 `;
 
 export const Form = styled.form`
@@ -142,7 +152,6 @@ export const Form = styled.form`
 
 export const LeftContainer = styled.div`
   width: 1098px;
-  height: 100%;
   background-color: #f9f9f9;
   display: flex;
   flex-direction: column;

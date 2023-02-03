@@ -3,10 +3,10 @@ import styled from "styled-components";
 import vector from "../assets/Vector.png";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ title, page, navigate }) => {
+const Navbar = ({ title, page }) => {
   return (
     <Nav>
-      <Link to={navigate}>
+      <Link to={'/'}>
         <VectorContainer>
           <img src={vector} alt="vector" />
         </VectorContainer>
@@ -35,6 +35,7 @@ const Title = styled.h1`
   font-size: 24px;
   font-weight: 700;
   color: #1a1a1a;
+  margin: 10px 0px;
 `;
 
 const Page = styled(Title)`

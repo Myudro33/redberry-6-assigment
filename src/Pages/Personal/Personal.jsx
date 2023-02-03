@@ -4,11 +4,15 @@ import Navbar from "../../Components/Navbar";
 import { Button } from "../../Components/GlobalStyledComponents";
 import { FiAtSign } from "react-icons/fi";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import logo from '../../assets/LOGO-12 1.png'
+import { Link } from "react-router-dom";
+
+
 const Personal = () => {
   return (
     <styled.Container>
       <styled.LeftContainer>
-        <Navbar title="პირადი ინფო" page={"1/3"} navigate="/" />
+        <Navbar title="პირადი ინფო" page={"1/3"} />
         <styled.Form>
           <styled.NameContainer>
             <styled.Label>
@@ -59,9 +63,14 @@ const Personal = () => {
               უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს
             </styled.Requirements>
           </styled.Label>
+          <styled.NavigationContainer>
+
+          <Link to={'/experience'}>
           <Button type="submit" width="151px">
             შემდეგი
           </Button>
+          </Link>
+          </styled.NavigationContainer>
         </styled.Form>
       </styled.LeftContainer>
       <styled.RightContainer>
@@ -86,8 +95,9 @@ const Personal = () => {
               გამამხნევებელი ვარჯიშების მაგიერ დიზაინს ვაკეთებ.
             </styled.AboutMySelf>
           </styled.PersonalInfoContainer>
-          <styled.PersonalImage/>
+          <styled.PersonalImage />
         </styled.PersonalContainer>
+        <styled.AbsoluteImage src={logo} alt='logo' />
       </styled.RightContainer>
     </styled.Container>
   );
