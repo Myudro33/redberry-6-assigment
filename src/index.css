@@ -1,9 +1,29 @@
 @import url('https://fonts.cdnfonts.com/css/helvetica-neue-9');
 
 
+#label {
+  cursor: pointer;
+  width: 107px;
+  height: 27px;
+  background-color: #0E80BF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: white;
+  margin-left: 15px;
+}
+
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
 
 *{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: 'Helvetica Neue';
 }
