@@ -86,7 +86,7 @@ export const Textarea = styled.textarea`
 `;
 
 export const FileTitle = styled.h1`
-  color: #1a1a1a;
+  color: ${props=>props.error?props.error:'#1a1a1a'};
   font-size: 18px;
   font-weight: 900;
 `;
@@ -99,7 +99,7 @@ export const FileUploadContainer = styled.div`
 `;
 
 export const Requirements = styled.p`
-  color: #2e2e2e;
+  color: ${props=>props.color?props.color:'#2e2e2e'};
   font-weight: 300;
   font-size: 14px;
 `;
@@ -107,7 +107,7 @@ export const Requirements = styled.p`
 export const Input = styled.input`
   height: 48px;
   width: ${(props) => props.width};
-  border: ${(props) => (props.border ? "1px solid red" : "1px solid #bcbcbc")};
+  border: ${(props) => (props.border ? props.border : "1px solid #bcbcbc")};
   border-radius: 4px;
   padding: 10px;
   margin: 5px 0px;
@@ -118,6 +118,7 @@ export const Input = styled.input`
 `;
 
 export const Label = styled.label`
+  color: ${props=>props.color?props.color:'#000'};
   display: flex;
   flex-direction: column;
   font-size: 16px;
