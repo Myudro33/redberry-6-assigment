@@ -1,5 +1,7 @@
-@import url('https://fonts.cdnfonts.com/css/helvetica-neue-9');
-
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("./assets/HelveticaNeue.ttc");
+}
 
 #label {
   cursor: pointer;
@@ -25,5 +27,5 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Helvetica Neue';
+  font-family: "HelveticaNeue";
 }

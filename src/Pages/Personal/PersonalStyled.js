@@ -34,7 +34,7 @@ export const Contact = styled.p`
 export const NameTitle = styled.h1`
   color: #f93b1d;
   font-size: 34px;
-  font-weight: 700;
+  font-weight: bolder;
   margin: 10px 0px;
 `;
 
@@ -88,7 +88,7 @@ export const Textarea = styled.textarea`
 export const FileTitle = styled.h1`
   color: #1a1a1a;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 900;
 `;
 export const FileUploadContainer = styled.div`
   width: 100%;
