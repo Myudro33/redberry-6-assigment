@@ -62,12 +62,12 @@ const Experience = () => {
 
           <styled.NavigationContainer>
             <Link to={"/personal"}>
-              <Button style={{ margin: 0 }} width="113px">
+              <Button  width="113px">
                 უკან
               </Button>
             </Link>
             <Link to={"/education"}>
-              <Button style={{ margin: 0 }} width="151px">
+              <Button width="151px">
                 შემდეგი
               </Button>
             </Link>

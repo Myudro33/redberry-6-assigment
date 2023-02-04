@@ -152,6 +152,7 @@ export const Form = styled.form`
 
 export const LeftContainer = styled.div`
   width: 1098px;
+  height: auto;
   background-color: #f9f9f9;
   display: flex;
   flex-direction: column;
@@ -161,6 +162,6 @@ export const LeftContainer = styled.div`
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
 `;

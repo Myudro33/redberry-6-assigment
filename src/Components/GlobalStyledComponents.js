@@ -5,6 +5,14 @@ import styled from "styled-components";
 
 
 
+
+export const Select = styled.select`
+  width: 371px;
+  height: 48px;
+  border: 1px solid #BCBCBC;
+`
+
+
 export const MoreOptionsButton = styled.button`
 width: 289px;
 height: 48px;
