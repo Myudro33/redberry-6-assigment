@@ -3,7 +3,7 @@ import * as styled from "../Pages/Experience/ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const ExperienceFormComponent = ({ index, setmoreOptions, moreOptions }) => {
+const ExperienceFormComponent = ({ index, setmoreOptions }) => {
   const formik = useFormik({
     initialValues: {
       position: "",

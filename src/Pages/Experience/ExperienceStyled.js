@@ -120,6 +120,17 @@ export const Requirements = styled.p`
   font-weight: 300;
   font-size: 14px;
 `;
+export const Option = styled.option`
+width: 371px !important;
+height: 48px;
+`
+export const Select = styled.select`
+width: 371px;
+height: 48px;
+border: ${props=>props.error?props.error:'1px solid #BCBCBC'};
+border-radius: 4px;
+padding: 5px;
+`
 
 export const Input = styled.input`
   height: 48px;
@@ -148,7 +159,7 @@ export const Form = styled.form`
   height: auto;
   display: flex;
   flex-direction: column;
-  margin-top: 70px;
+  margin-top: 50px;
 `;
 
 export const LeftContainer = styled.div`

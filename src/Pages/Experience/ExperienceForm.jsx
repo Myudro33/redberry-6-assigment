@@ -29,7 +29,6 @@ const ExperienceForm = () => {
         <ExperienceFormComponent
           key={index}
           setmoreOptions={setmoreOptions}
-          moreOptions={moreOptions}
           index={index}
         />
       ))}
