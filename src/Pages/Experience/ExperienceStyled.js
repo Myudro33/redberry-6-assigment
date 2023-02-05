@@ -82,7 +82,7 @@ export const RightContainer = styled.div`
 // მარცხენა მხარე
 
 export const NavigationContainer = styled.div`
-  width: 100%;
+  width: 798px;
   display: flex;
   height: 48px;
   justify-content: space-between;
@@ -116,7 +116,7 @@ export const DateContainer = styled.div`
 `;
 
 export const Requirements = styled.p`
-  color: #2e2e2e;
+  color: ${(props) => (props.color ? props.color : "#2e2e2e")};
   font-weight: 300;
   font-size: 14px;
 `;
@@ -135,7 +135,7 @@ export const Input = styled.input`
 `;
 
 export const Label = styled.label`
-color: ${(props) => (props.color ? props.color : "#000")};
+  color: ${(props) => (props.color ? props.color : "#000")};
   display: flex;
   flex-direction: column;
   font-size: 16px;

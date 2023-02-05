@@ -21,7 +21,7 @@ color: white;
 border-radius: 4px;
 font-size: 16px;
 border: none;
-margin: 20px 0px;
+margin: 20px 51% 20px 0px;
 `
 
 
