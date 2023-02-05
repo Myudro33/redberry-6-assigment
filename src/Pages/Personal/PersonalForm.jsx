@@ -9,7 +9,7 @@ import useLocalStorage from "../../Context/useLocalStorage";
 import { StoreContext } from "../../Context/StoreContext";
 
 const PersonalForm = () => {
-  const { file, setFile } = useContext(StoreContext);
+  const { file, setFile,setdata } = useContext(StoreContext);
   const [store, setstore] = useLocalStorage("store", {
     name: "",
     surname: "",
@@ -52,6 +52,11 @@ const PersonalForm = () => {
       setstore({ ...store, image: e.target.files[0].name });
     }
   };
+
+  useEffect(()=>{
+   setdata(store)
+  },[formik.values])
+
   return (
     <styled.LeftContainer>
       <Navbar title="პირადი ინფო" page={"1/3"} />

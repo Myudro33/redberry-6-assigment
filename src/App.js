@@ -8,10 +8,12 @@ import { StoreContext } from "./Context/StoreContext";
 import useLocalStorage from "./Context/useLocalStorage";
 const App = () => {
   const [personalInfo, setpersonalInfo] = useState('');
+  const [data, setdata] = useState()
   const [file, setFile] = useState()
+
   return (
     <div>
-      <StoreContext.Provider value={{personalInfo,setpersonalInfo,file,setFile}}>
+      <StoreContext.Provider value={{personalInfo,setpersonalInfo,file,setFile,setdata,data}}>
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/personal"} element={<Personal />} />

@@ -8,7 +8,7 @@ import { StoreContext } from "../Context/StoreContext.js";
 
 const Resume = () => {
   const [store, setstore] = useLocalStorage("store", "");
-  const { file } = useContext(StoreContext);
+  const { file,data } = useContext(StoreContext);
 
   useEffect(() => {
     if (file !== undefined) {
@@ -18,32 +18,35 @@ const Resume = () => {
           ? URL.createObjectURL(file)
           : "",
       });
-    } else {
-      console.log("false");
     }
   }, [file]);
-
   return (
     <styled.RightContainer>
       <styled.PersonalContainer>
         <styled.PersonalInfoContainer>
-          <styled.NameTitle>{`${store.name} ${" "} ${
-            store.surname
+          <styled.NameTitle>{`${data?.name} ${" "} ${
+            data?.surname
           }`}</styled.NameTitle>
           <styled.Contact>
-            <FiAtSign style={{ color: "#898989", marginRight: "5px" }} />{" "}
-            {store.email}
+            {data?.email!==''&&(
+              <FiAtSign style={{ color: "#898989", marginRight: "5px" }} />
+            )}
+            {data?.email}
           </styled.Contact>
           <styled.Contact>
-            <BsFillTelephoneFill
-              style={{ color: "#898989", marginRight: "5px" }}
-            />{" "}
-            {store.phone_number}
+            {data?.phone_number!==''&&(
+              <BsFillTelephoneFill
+                style={{ color: "#898989", marginRight: "5px" }}
+              />
+            )}
+            {data?.phone_number}
           </styled.Contact>
+          {data?.about_me!==''&&(
           <styled.NameTitle style={{ fontSize: "18px", margin: "15px 0px" }}>
             ჩემს შესახებ
           </styled.NameTitle>
-          <styled.AboutMySelf>{store.about_me}</styled.AboutMySelf>
+          )}
+          <styled.AboutMySelf>{data?.about_me}</styled.AboutMySelf>
         </styled.PersonalInfoContainer>
         <styled.PersonalImage src={store.file} />
       </styled.PersonalContainer>

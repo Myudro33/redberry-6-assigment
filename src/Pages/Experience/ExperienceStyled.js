@@ -39,6 +39,7 @@ export const AboutMySelf = styled.p`
   font-size: 16px;
   color: #000000;
   width: 430px;
+  word-wrap: break-word;
 `;
 
 export const Contact = styled.p`
