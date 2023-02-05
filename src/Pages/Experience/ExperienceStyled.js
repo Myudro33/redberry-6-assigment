@@ -34,7 +34,6 @@ export const PersonalImage = styled.img`
   width: 246px;
   height: 246px;
   border-radius: 50%;
-  border: 1px solid black;
 `;
 export const AboutMySelf = styled.p`
   font-size: 16px;

@@ -47,9 +47,6 @@ const ExperienceFormComponent = ({ index, setmoreOptions }) => {
       );
     }
   }, [formik.values]);
-
-  console.log(formik.errors.position);
-
   return (
     <styled.Form onSubmit={formik.handleSubmit}>
       <styled.Label

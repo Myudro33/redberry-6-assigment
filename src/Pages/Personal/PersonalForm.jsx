@@ -1,51 +1,55 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import * as styled from "./PersonalStyled";
 import Navbar from "../../Components/Navbar";
 import { Button } from "../../Components/GlobalStyledComponents";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import useLocalStorage from "../../Context/useLocalStorage";
+import { StoreContext } from "../../Context/StoreContext";
 
 const PersonalForm = () => {
-  const [file, setFile] = useState();
+  const { file, setFile } = useContext(StoreContext);
+  const [store, setstore] = useLocalStorage("store", {
+    name: "",
+    surname: "",
+    email: "",
+    phone_number: "",
+    about_me: "",
+    image: "",
+    file: "",
+  });
   const navigate = useNavigate();
   const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      photo: "",
-      aboutYourself: "",
-      email: "",
-      number: "",
-    },
+    initialValues: store,
     validationSchema: Yup.object({
-      firstName: Yup.string()
+      name: Yup.string()
         .min(2, "მინიმუმ 2 ასო")
         .matches(/^[\u10A0-\u10FF]+$/, "მხოლოდ ქართული ასოები")
         .required("სავალდებულო"),
-      lastName: Yup.string()
+      surname: Yup.string()
         .min(2, "მინიმუმ 2 ასო")
         .matches(/^[\u10A0-\u10FF]+$/, "მხოლოდ ქართული ასოები")
         .required("სავალდებულო"),
-      photo: Yup.string().required("სავალდებულო"),
+      image: Yup.string().required("სავალდებულო"),
       email: Yup.string()
         .matches(/.*\@redberry.ge$/, "უნდა მთავრდებოდეს @redberry.ge-ით")
         .required("სავალდებულო"),
-      number: Yup.string()
+      phone_number: Yup.string()
         .matches(
           /^(\+?995)?(79\d{7}|5\d{8})$/,
           "უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს"
         )
         .required("სავალდებულო"),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values));
+    onSubmit: () => {
       navigate("/experience");
     },
   });
   const handleFileChange = (e) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
+      setstore({ ...store, image: e.target.files[0].name });
     }
   };
   return (
@@ -54,63 +58,65 @@ const PersonalForm = () => {
       <styled.Form onSubmit={formik.handleSubmit}>
         <styled.NameContainer>
           <styled.Label
-            color={formik.errors.firstName && formik.touched.firstName && "red"}
+            color={formik.errors.name && formik.touched.name && "red"}
           >
             სახელი
             <styled.Input
-              name="firstName"
-              value={formik.values.firstName}
+              name="name"
+              value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              onChangeCapture={(e) =>
+                setstore({ ...store, name: e.target.value })
+              }
               type={"text"}
               placeholder="ანზორ"
               width={"371px"}
               border={
-                formik.errors.firstName &&
-                formik.touched.firstName &&
-                "1px solid red"
+                formik.errors.name && formik.touched.name && "1px solid red"
               }
             />
             <styled.Requirements
-              color={
-                formik.errors.firstName && formik.touched.firstName && "red"
-              }
+              color={formik.errors.name && formik.touched.name && "red"}
             >
-              {formik.errors.firstName && formik.touched.firstName
-                ? formik.errors.firstName
+              {formik.errors.name && formik.touched.name
+                ? formik.errors.name
                 : "მინიმუმ 2 ასო, ქართული ასოები"}
             </styled.Requirements>
           </styled.Label>
           <styled.Label
-            color={formik.errors.lastName && formik.touched.lastName && "red"}
+            color={formik.errors.surname && formik.touched.surname && "red"}
           >
             გვარი
             <styled.Input
-              name="lastName"
-              value={formik.values.lastName}
+              name="surname"
+              value={formik.values.surname}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              onChangeCapture={(e) =>
+                setstore({ ...store, surname: e.target.value })
+              }
               type={"text"}
               placeholder="მუმლაძე"
               width={"371px"}
               border={
-                formik.errors.lastName &&
-                formik.touched.lastName &&
+                formik.errors.surname &&
+                formik.touched.surname &&
                 "1px solid red"
               }
             />
             <styled.Requirements
-              color={formik.errors.lastName && formik.touched.lastName && "red"}
+              color={formik.errors.surname && formik.touched.surname && "red"}
             >
-              {formik.errors.lastName && formik.touched.lastName
-                ? formik.errors.lastName
+              {formik.errors.surname && formik.touched.surname
+                ? formik.errors.surname
                 : "მინიმუმ 2 ასო, ქართული ასოები"}
             </styled.Requirements>
           </styled.Label>
         </styled.NameContainer>
         <styled.FileUploadContainer>
           <styled.FileTitle
-            error={formik.errors.photo && formik.touched.photo && "red"}
+            error={formik.errors.image && formik.touched.image && "red"}
           >
             პირადი ფოტოს ატვირთვა
           </styled.FileTitle>
@@ -118,8 +124,7 @@ const PersonalForm = () => {
             ატვირთვა
           </label>
           <input
-            value={formik.values.photo}
-            onChange={handleFileChange}
+            onChange={(e) => handleFileChange(e)}
             onChangeCapture={formik.handleChange}
             onBlur={formik.handleBlur}
             name="photo"
@@ -130,9 +135,12 @@ const PersonalForm = () => {
         <styled.Label style={{ marginTop: "50px" }}>
           ჩემს შესახებ (არასავალდებულო)
           <styled.Textarea
-            name="aboutYourself"
-            value={formik.values.aboutYourself}
+            name="about_me"
+            value={formik.values.about_me}
             onChange={formik.handleChange}
+            onChangeCapture={(e) =>
+              setstore({ ...store, about_me: e.target.value })
+            }
             onBlur={formik.handleBlur}
             placeholder="ზოგადი ინფო შენს შესახებ"
           />
@@ -146,6 +154,9 @@ const PersonalForm = () => {
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
+            onChangeCapture={(e) =>
+              setstore({ ...store, email: e.target.value })
+            }
             onBlur={formik.handleBlur}
             placeholder="anzori666@redberry.ge"
             width={"100%"}
@@ -163,25 +174,34 @@ const PersonalForm = () => {
           </styled.Requirements>
         </styled.Label>
         <styled.Label
-          color={formik.errors.number && formik.touched.number && "red"}
+          color={
+            formik.errors.phone_number && formik.touched.phone_number && "red"
+          }
           style={{ marginTop: "50px" }}
         >
           მობილურის ნომერი
           <styled.Input
-            name="number"
-            value={formik.values.number}
+            name="phone_number"
+            value={formik.values.phone_number}
             onChange={formik.handleChange}
+            onChangeCapture={(e) =>
+              setstore({ ...store, phone_number: e.target.value })
+            }
             onBlur={formik.handleBlur}
             placeholder="+995 551 12 31 12"
             border={
-              formik.errors.number && formik.touched.number && "1px solid red"
+              formik.errors.phone_number &&
+              formik.touched.phone_number &&
+              "1px solid red"
             }
           />
           <styled.Requirements
-            color={formik.errors.number && formik.touched.number && "red"}
+            color={
+              formik.errors.phone_number && formik.touched.phone_number && "red"
+            }
           >
-            {formik.errors.number && formik.touched.number
-              ? formik.errors.number
+            {formik.errors.phone_number && formik.touched.phone_number
+              ? formik.errors.phone_number
               : "უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს"}
           </styled.Requirements>
         </styled.Label>

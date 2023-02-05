@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as styled from "./ExperienceStyled";
 import Navbar from "../../Components/Navbar";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Button,
   MoreOptionsButton,
@@ -44,7 +45,9 @@ const ExperienceForm = () => {
           მეტი გამოცდილების დამატება
         </MoreOptionsButton>
       <styled.NavigationContainer>
+        <Link to={'/personal'} >
         <Button width="113px">უკან</Button>
+        </Link>
         <Button type="button" onClick={handleSubmit} width="151px">
           შემდეგი
         </Button>
