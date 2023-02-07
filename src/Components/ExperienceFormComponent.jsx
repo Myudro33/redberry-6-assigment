@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import * as styled from "../Pages/Experience/ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const ExperienceFormComponent = ({ index, setmoreOptions }) => {
+const ExperienceFormComponent = () => {
   const formik = useFormik({
     initialValues: {
       position: "",
       employer: "",
-      startDate: "",
-      endDate: "",
-      aboutJob: "",
+      start_date: "",
+      due_date: "",
+      description: "",
     },
     validationSchema: Yup.object({
       position: Yup.string()
@@ -19,34 +19,15 @@ const ExperienceFormComponent = ({ index, setmoreOptions }) => {
       employer: Yup.string()
         .min(2, "მინიმუმ 2 სიმბოლო")
         .required("სავალდებულო"),
-      startDate: Yup.string().required("სავალდებულო"),
-      endDate: Yup.string().required("სავალდებულო"),
-      aboutJob: Yup.string().required("სავალდებულო"),
+      start_date: Yup.string().required("სავალდებულო"),
+      due_date: Yup.string().required("სავალდებულო"),
+      description: Yup.string().required("სავალდებულო"),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values));
     },
   });
 
-  useEffect(() => {
-    if (
-      Object.keys(formik.errors).length === 0 &&
-      formik.values.aboutJob !== "" &&
-      formik.values.employer !== "" &&
-      formik.values.endDate !== "" &&
-      formik.values.position !== "" &&
-      formik.values.startDate !== ""
-    ) {
-      setmoreOptions((prevOptions) =>
-        prevOptions.map((item) => {
-          if (item.id === index) {
-            return { ...item, validate: true };
-          }
-          return item;
-        })
-      );
-    }
-  }, [formik.values]);
   return (
     <styled.Form onSubmit={formik.handleSubmit}>
       <styled.Label
@@ -99,52 +80,56 @@ const ExperienceFormComponent = ({ index, setmoreOptions }) => {
       </styled.Label>
       <styled.DateContainer>
         <styled.Label
-          color={formik.errors.startDate && formik.touched.startDate && "red"}
+          color={formik.errors.start_date && formik.touched.start_date && "red"}
         >
           დაწყების თარიღი
           <styled.Input
-            name="startDate"
-            value={formik.values.startDate}
+            name="start_date"
+            value={formik.values.start_date}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             width={"371px"}
             type={"date"}
             border={
-              formik.errors.startDate &&
-              formik.touched.startDate &&
+              formik.errors.start_date &&
+              formik.touched.start_date &&
               "1px solid red"
             }
           />
         </styled.Label>
         <styled.Label
-          color={formik.errors.endDate && formik.touched.endDate && "red"}
+          color={formik.errors.due_date && formik.touched.due_date && "red"}
         >
           დამთავრების თარიღი
           <styled.Input
-            name="endDate"
-            value={formik.values.endDate}
+            name="due_date"
+            value={formik.values.due_date}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             width={"371px"}
             type={"date"}
             border={
-              formik.errors.endDate && formik.touched.endDate && "1px solid red"
+              formik.errors.due_date &&
+              formik.touched.due_date &&
+              "1px solid red"
             }
           />
         </styled.Label>
       </styled.DateContainer>
       <styled.Label
-        color={formik.errors.aboutJob && formik.touched.aboutJob && "red"}
+        color={formik.errors.description && formik.touched.description && "red"}
       >
         აღწერა
         <styled.Textarea
-          name="aboutJob"
-          value={formik.values.aboutJob}
+          name="description"
+          value={formik.values.description}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
           error={
-            formik.errors.aboutJob && formik.touched.aboutJob && "1px solid red"
+            formik.errors.description &&
+            formik.touched.description &&
+            "1px solid red"
           }
         />
       </styled.Label>

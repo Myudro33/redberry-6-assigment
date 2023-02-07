@@ -5,23 +5,21 @@ import { Button } from "../../Components/GlobalStyledComponents";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import useLocalStorage from "../../Context/useLocalStorage";
 import { StoreContext } from "../../Context/StoreContext";
-
 const PersonalForm = () => {
-  const { file, setFile,setdata } = useContext(StoreContext);
-  const [store, setstore] = useLocalStorage("store", {
-    name: "",
-    surname: "",
-    email: "",
-    phone_number: "",
-    about_me: "",
-    image: "",
-    file: "",
-  });
+  const { setPersonalInfo, store } = useContext(StoreContext);
+  const [file, setfile] = useState(store.file);
   const navigate = useNavigate();
   const formik = useFormik({
-    initialValues: store,
+    initialValues: {
+      name: store?.name,
+      surname: store?.surname,
+      email: store?.email,
+      phone_number: store?.phone_number,
+      about_me: store?.about_me,
+      image: store.image,
+      file: file,
+    },
     validationSchema: Yup.object({
       name: Yup.string()
         .min(2, "მინიმუმ 2 ასო")
@@ -37,25 +35,34 @@ const PersonalForm = () => {
         .required("სავალდებულო"),
       phone_number: Yup.string()
         .matches(
-          /^(\+?995)?(79\d{7}|5\d{8})$/,
+          /^\+995\s5\d{2}\s\d{2}\s\d{2}\s\d{2}$/,
           "უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს"
         )
         .required("სავალდებულო"),
     }),
     onSubmit: () => {
+      setPersonalInfo(formik.values);
       navigate("/experience");
     },
   });
-  const handleFileChange = (e) => {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
-      setstore({ ...store, image: e.target.files[0].name });
-    }
+
+  useEffect(() => {
+    setPersonalInfo(formik.values);
+  }, [formik.values]);
+
+  const handleChange = (e) => {
+    const objectUrl = URL.createObjectURL(
+      new Blob([e.target.files[0]], { type: "image/png" })
+    );
+    setfile(objectUrl);
+    formik.initialValues.file = objectUrl;
+    return () => URL.revokeObjectURL(objectUrl);
   };
 
-  useEffect(()=>{
-   setdata(store)
-  },[formik.values])
+  useEffect(() => {
+    formik.values.file = file;
+    setPersonalInfo(formik.initialValues);
+  }, [file, formik.initialValues]);
 
   return (
     <styled.LeftContainer>
@@ -71,9 +78,6 @@ const PersonalForm = () => {
               value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              onChangeCapture={(e) =>
-                setstore({ ...store, name: e.target.value })
-              }
               type={"text"}
               placeholder="ანზორ"
               width={"371px"}
@@ -98,9 +102,6 @@ const PersonalForm = () => {
               value={formik.values.surname}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              onChangeCapture={(e) =>
-                setstore({ ...store, surname: e.target.value })
-              }
               type={"text"}
               placeholder="მუმლაძე"
               width={"371px"}
@@ -129,10 +130,11 @@ const PersonalForm = () => {
             ატვირთვა
           </label>
           <input
-            onChange={(e) => handleFileChange(e)}
-            onChangeCapture={formik.handleChange}
+            onChange={formik.handleChange}
+            onChangeCapture={(e) => handleChange(e)}
             onBlur={formik.handleBlur}
-            name="photo"
+            value={undefined}
+            name="image"
             type="file"
             id="upload-photo"
           />
@@ -143,9 +145,6 @@ const PersonalForm = () => {
             name="about_me"
             value={formik.values.about_me}
             onChange={formik.handleChange}
-            onChangeCapture={(e) =>
-              setstore({ ...store, about_me: e.target.value })
-            }
             onBlur={formik.handleBlur}
             placeholder="ზოგადი ინფო შენს შესახებ"
           />
@@ -159,9 +158,6 @@ const PersonalForm = () => {
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
-            onChangeCapture={(e) =>
-              setstore({ ...store, email: e.target.value })
-            }
             onBlur={formik.handleBlur}
             placeholder="anzori666@redberry.ge"
             width={"100%"}
@@ -189,9 +185,6 @@ const PersonalForm = () => {
             name="phone_number"
             value={formik.values.phone_number}
             onChange={formik.handleChange}
-            onChangeCapture={(e) =>
-              setstore({ ...store, phone_number: e.target.value })
-            }
             onBlur={formik.handleBlur}
             placeholder="+995 551 12 31 12"
             border={

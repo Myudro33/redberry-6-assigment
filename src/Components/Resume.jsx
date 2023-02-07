@@ -3,52 +3,39 @@ import * as styled from "../Pages/Experience/ExperienceStyled.js";
 import { FiAtSign } from "react-icons/fi";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import logo from "../assets/LOGO-12 1.png";
-import useLocalStorage from "../Context/useLocalStorage.js";
 import { StoreContext } from "../Context/StoreContext.js";
 
 const Resume = () => {
-  const [store, setstore] = useLocalStorage("store", "");
-  const { file,data } = useContext(StoreContext);
-
-  useEffect(() => {
-    if (file !== undefined) {
-      setstore({
-        ...store,
-        file: file
-          ? URL.createObjectURL(file)
-          : "",
-      });
-    }
-  }, [file]);
+  const {store} = useContext(StoreContext)  
   return (
     <styled.RightContainer>
       <styled.PersonalContainer>
         <styled.PersonalInfoContainer>
-          <styled.NameTitle>{`${data?.name} ${" "} ${
-            data?.surname
+          <styled.NameTitle>{`${store?.name} ${" "} ${
+            store?.surname
           }`}</styled.NameTitle>
           <styled.Contact>
-            {data?.email!==''&&(
+            {store?.email!==''&&(
               <FiAtSign style={{ color: "#898989", marginRight: "5px" }} />
             )}
-            {data?.email}
+            {store?.email}
           </styled.Contact>
           <styled.Contact>
-            {data?.phone_number!==''&&(
+            {store?.phone_number!==''&&(
               <BsFillTelephoneFill
                 style={{ color: "#898989", marginRight: "5px" }}
               />
             )}
-            {data?.phone_number}
+            {store?.phone_number}
           </styled.Contact>
-          {data?.about_me!==''&&(
+          {store?.about_me!==''&&(
           <styled.NameTitle style={{ fontSize: "18px", margin: "15px 0px" }}>
             ჩემს შესახებ
           </styled.NameTitle>
           )}
-          <styled.AboutMySelf>{data?.about_me}</styled.AboutMySelf>
+          <styled.AboutMySelf>{store?.about_me}</styled.AboutMySelf>
         </styled.PersonalInfoContainer>
-        <styled.PersonalImage src={store.file} />
+        <styled.PersonalImage src={store.file}  />
       </styled.PersonalContainer>
       <styled.Hr style={{ margin: 0 }} />
       <styled.ExperienceContainer>
