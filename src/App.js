@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Education from "./Pages/Education/Education";
 import Experience from "./Pages/Experience/Experience";

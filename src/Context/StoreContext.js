@@ -15,7 +15,15 @@ const initStore = {
       description: "",
     },
   ],
-  educations: [],
+  educations: [
+    {
+      id: 0,
+      institute: "",
+      degree: "",
+      due_date: "",
+      description: "",
+    },
+  ],
   image: "",
   about_me: "",
   file: "",
@@ -35,25 +43,48 @@ const StoreContextProvider = (props) => {
     localStorage.setItem("store", JSON.stringify(store));
   }, [store]);
 
-  const updateExpeiencesInfo = (info, index) => {
-    setstore((prev)=>{
-    const newStore = store.experiences.map((obj) => {
-      if (obj.id === index) {
-        return {
-          ...obj,
-          position: info?.position,
-          employer: info?.employer,
-          start_date: info?.start_date,
-          due_date:info?.due_date,
-          description: info?.description,
-        };
-      }
-      return obj; 
-    });
-   return {...prev,experiences:newStore}
-  })
-  localStorage.setItem('store',store)
+  const clearLocalStorage = () => {
+    setstore(initStore)
   };
+  const updateExpeiencesInfo = (info, index) => {
+    setstore((prev) => {
+      const newStore = store.experiences.map((obj) => {
+        if (obj.id === index) {
+          return {
+            ...obj,
+            position: info?.position,
+            employer: info?.employer,
+            start_date: info?.start_date,
+            due_date: info?.due_date,
+            description: info?.description,
+          };
+        }
+        return obj;
+      });
+      return { ...prev, experiences: newStore };
+    });
+    localStorage.setItem("store", JSON.stringify(store));
+  };
+
+  const updateEducationsInfo = (info, index) => {
+    setstore((prev) => {
+      const newStore = store.educations.map((obj) => {
+        if (obj.id === index) {
+          return {
+            ...obj,
+            institute: info?.institute,
+            degree: info?.degree,
+            due_date: info?.due_date,
+            description: info?.description,
+          };
+        }
+        return obj;
+      });
+      return { ...prev, educations: newStore };
+    });
+    localStorage.setItem("store", JSON.stringify(store));
+  };
+
   const setExperienceInfo = () => {
     setstore((prev) => {
       const newStore = {
@@ -65,6 +96,26 @@ const StoreContextProvider = (props) => {
             position: "",
             employer: "",
             start_date: "",
+            due_date: "",
+            description: "",
+          },
+        ],
+      };
+      localStorage.setItem("store", JSON.stringify(newStore));
+      return newStore;
+    });
+  };
+
+  const setEducationsInfo = () => {
+    setstore((prev) => {
+      const newStore = {
+        ...prev,
+        educations: [
+          ...prev.educations,
+          {
+            id: store.experiences.length,
+            institute: "",
+            degree: "",
             due_date: "",
             description: "",
           },
@@ -98,6 +149,9 @@ const StoreContextProvider = (props) => {
         store,
         setExperienceInfo,
         updateExpeiencesInfo,
+        setEducationsInfo,
+        updateEducationsInfo,
+        clearLocalStorage,
       }}
     >
       {props.children}

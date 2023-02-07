@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../../Components/Navbar";
 import * as styled from "../Experience/ExperienceStyled";
 import {
@@ -8,31 +8,28 @@ import {
 import { Link } from "react-router-dom";
 import EducationFormComponent from "../../Components/EducationFormComponent";
 import { useNavigate } from "react-router-dom";
+import { StoreContext } from "../../Context/StoreContext";
 
 const EducationForm = () => {
-  const navigate = useNavigate()
-    const [moreOptions, setmoreOptions] = useState([{validate:false,id:0}]);
-    const [validate, setvalidate] = useState(false)
-    const handleSubmit = () => {
-      moreOptions.map((item) => {
-        if (item.validate === false) {
-          setvalidate(false);
-        } else {
-          setvalidate(true);
-          navigate("/resume");
-        }
-      });
-    };
+  const navigate = useNavigate();
+  const { store,setEducationsInfo } = useContext(StoreContext);
+  console.log(store)
+  const handleSubmit = () => {
+  navigate("/resume")
+  };
   return (
     <styled.LeftContainer>
-    <Navbar page={"3/3"} title="განათლება" />
-  
-      {moreOptions.map((item, index) => (
-        <EducationFormComponent setmoreOptions={setmoreOptions} index={index} key={index} />
+      <Navbar page={"3/3"} title="განათლება" />
+
+      {store?.educations.map((item, index) => (
+        <EducationFormComponent
+          index={index}
+          key={index}
+        />
       ))}
       <MoreOptionsButton
-      type="button"
-        onClick={() => setmoreOptions([...moreOptions, {validate:false,id:moreOptions.length}])}
+        type="button"
+        onClick={() =>setEducationsInfo()}
       >
         სხვა სასწავლებლის დამატება
       </MoreOptionsButton>
@@ -40,11 +37,12 @@ const EducationForm = () => {
         <Link to={"/experience"}>
           <Button width="113px">უკან</Button>
         </Link>
-          <Button width="151px" onClick={handleSubmit} >დასრულება</Button>
+        <Button width="151px" onClick={handleSubmit}>
+          დასრულება
+        </Button>
       </styled.NavigationContainer>
-    
-  </styled.LeftContainer>
-  )
-}
+    </styled.LeftContainer>
+  );
+};
 
-export default EducationForm
+export default EducationForm;

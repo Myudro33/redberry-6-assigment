@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Heading,
@@ -10,8 +10,15 @@ import {
 } from "./HomeStyled";
 import redberryLogo from "../../assets/redberry-logo.png";
 import backgroundLogo from "../../assets/background-logo.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { StoreContext } from "../../Context/StoreContext";
 const Home = () => {
+  const navigate = useNavigate();
+  const { clearLocalStorage } = useContext(StoreContext);
+  const handleNavigate = () => {
+    clearLocalStorage();
+    navigate("/personal");
+  };
   return (
     <Container>
       <Heading>
@@ -19,9 +26,7 @@ const Home = () => {
         <Line />
       </Heading>
       <ButtonContainer>
-        <Link to={"/personal"}>
-          <Button>რეზიუმეს დამატება</Button>
-        </Link>
+        <Button onClick={() => handleNavigate()}>რეზიუმეს დამატება</Button>
         <BackgroundImg src={backgroundLogo} alt="backgroundlogo" />
       </ButtonContainer>
     </Container>

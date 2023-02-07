@@ -1,73 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import getDegrees from "../Pages/Education/getDegrees";
 import * as styled from "../Pages/Experience/ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { StoreContext } from "../Context/StoreContext";
 
-const EducationFormComponent = ({index,setmoreOptions}) => {
+const EducationFormComponent = ({index}) => {
   const [degrees, setdegrees] = useState();
+  const {store,updateEducationsInfo} = useContext(StoreContext)
   useEffect(() => {
     getDegrees(setdegrees);
   }, []);
   const formik = useFormik({
     initialValues: {
-      college: "",
-      degree: "",
-      endDate: "",
-      aboutCollege: "",
+      institute: store?.educations[index].institute,
+      degree: store?.educations[index].degree,
+      due_date: store?.educations[index].due_date,
+      description: store?.educations[index].description,
     },
     validationSchema: Yup.object({
-      college: Yup.string().min(2, "მინიმუმ 2 სიმბოლო").required("სავალდებულო"),
+      institute: Yup.string().min(2, "მინიმუმ 2 სიმბოლო").required("სავალდებულო"),
       degree: Yup.string().required("სავალდებულო"),
-      endDate: Yup.string().required("სავალდებულო"),
-      aboutCollege: Yup.string().required("სავალდებულო"),
+      due_date: Yup.string().required("სავალდებულო"),
+      description: Yup.string().required("სავალდებულო"),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values));
     },
   });
 
-  useEffect(() => {
-    if (
-      Object.keys(formik.errors).length === 0 &&
-      formik.values.aboutCollege !== "" &&
-      formik.values.college !== "" &&
-      formik.values.endDate !== "" &&
-      formik.values.degree !== "") {
-      setmoreOptions((prevOptions) =>
-        prevOptions.map((item) => {
-          if (item.id === index) {
-            return { ...item, validate: true };
-          }
-          return item;
-        })
-      );
-    }
-  }, [formik.values]);
+useEffect(()=>{
+updateEducationsInfo(formik.values,index)
+},[formik.values])
 
   return (
     <styled.Form>
       <styled.Label
-        color={formik.errors.college && formik.touched.college && "red"}
+        color={formik.errors.institute && formik.touched.institute && "red"}
       >
         სასწავლებელი
         <styled.Input
-          name="college"
-          value={formik.values.college}
+          name="institute"
+          value={formik.values.institute}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           type={"text"}
           width="100%"
           placeholder="სასწავლებელი"
           border={
-            formik.errors.college && formik.touched.college && "1px solid red"
+            formik.errors.institute && formik.touched.institute && "1px solid red"
           }
         />
         <styled.Requirements
-          color={formik.errors.college && formik.touched.college && "red"}
+          color={formik.errors.institute && formik.touched.institute && "red"}
         >
-          {formik.errors.college && formik.touched.college
-            ? formik.errors.college
+          {formik.errors.institute && formik.touched.institute
+            ? formik.errors.institute
             : "მინიმუმ 2 სიმბოლო"}
         </styled.Requirements>
       </styled.Label>
@@ -94,38 +82,38 @@ const EducationFormComponent = ({index,setmoreOptions}) => {
           </styled.Select>
         </styled.Label>
         <styled.Label
-          color={formik.errors.endDate && formik.touched.endDate && "red"}
+          color={formik.errors.due_date && formik.touched.due_date && "red"}
         >
           დამთავრების თარიღი
           <styled.Input
-            name="endDate"
-            value={formik.values.endDate}
+            name="due_date"
+            value={formik.values.due_date}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             type={"date"}
             width="371px"
             border={
-              formik.errors.endDate && formik.touched.endDate && "1px solid red"
+              formik.errors.due_date && formik.touched.due_date && "1px solid red"
             }
           />
         </styled.Label>
       </styled.DateContainer>
       <styled.Label
         color={
-          formik.errors.aboutCollege && formik.touched.aboutCollege && "red"
+          formik.errors.description && formik.touched.description && "red"
         }
       >
         აღწერა
         <styled.Textarea
-          name="aboutCollege"
-          value={formik.values.aboutCollege}
+          name="description"
+          value={formik.values.description}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           style={{ height: "179px" }}
           placeholder="განათლების აღწერა"
           error={
-            formik.errors.aboutCollege &&
-            formik.touched.aboutCollege &&
+            formik.errors.description &&
+            formik.touched.description &&
             "1px solid red"
           }
         />

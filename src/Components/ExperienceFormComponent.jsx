@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import * as styled from "../Pages/Experience/ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { StoreContext } from "../Context/StoreContext";
 
 const ExperienceFormComponent = ({index}) => {
-  const {store,updateExpeiencesInfo} = useContext(StoreContext)
+  const { store, updateExpeiencesInfo } = useContext(StoreContext);
   const formik = useFormik({
     initialValues: {
       position: store?.experiences[index].position,
@@ -26,16 +26,14 @@ const ExperienceFormComponent = ({index}) => {
       description: Yup.string().required("სავალდებულო"),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values));
+      
     },
   });
-
-useEffect(()=>{
-   updateExpeiencesInfo(formik.values,index)
-},[formik.values])
-
+  useEffect(() => {
+    updateExpeiencesInfo(formik.values, index);
+  }, [formik.values]);
   return (
-    <styled.Form onSubmit={formik.handleSubmit}>
+    <styled.Form  onSubmit={formik.handleSubmit}>
       <styled.Label
         color={formik.errors.position && formik.touched.position && "red"}
       >
