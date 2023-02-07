@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import * as styled from "../Pages/Experience/ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { StoreContext } from "../Context/StoreContext";
 
-const ExperienceFormComponent = () => {
+const ExperienceFormComponent = ({index}) => {
+  const {store,updateExpeiencesInfo} = useContext(StoreContext)
   const formik = useFormik({
     initialValues: {
-      position: "",
-      employer: "",
-      start_date: "",
-      due_date: "",
-      description: "",
+      position: store?.experiences[index].position,
+      employer: store?.experiences[index].employer,
+      start_date: store?.experiences[index].start_date,
+      due_date: store?.experiences[index].due_date,
+      description: store?.experiences[index].description,
     },
     validationSchema: Yup.object({
       position: Yup.string()
@@ -27,6 +29,10 @@ const ExperienceFormComponent = () => {
       alert(JSON.stringify(values));
     },
   });
+
+useEffect(()=>{
+   updateExpeiencesInfo(formik.values,index)
+},[formik.values])
 
   return (
     <styled.Form onSubmit={formik.handleSubmit}>

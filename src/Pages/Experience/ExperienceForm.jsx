@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import * as styled from "./ExperienceStyled";
 import Navbar from "../../Components/Navbar";
 import { Link } from "react-router-dom";
@@ -7,13 +7,17 @@ import {
   MoreOptionsButton,
 } from "../../Components/GlobalStyledComponents";
 import ExperienceFormComponent from "../../Components/ExperienceFormComponent";
+import { StoreContext } from "../../Context/StoreContext";
 
 const ExperienceForm = () => {
+const {setExperienceInfo,store} = useContext(StoreContext)
   return (
     <styled.LeftContainer>
       <Navbar title={"გამოცდილება"} page="2/3" />
-      <ExperienceFormComponent />
-      <MoreOptionsButton type="button">
+      {store?.experiences.map((item,index)=>(
+        <ExperienceFormComponent index={index} key={index} />
+      ))}
+      <MoreOptionsButton onClick={()=>setExperienceInfo()}  type="button">
         მეტი გამოცდილების დამატება
       </MoreOptionsButton>
       <styled.NavigationContainer>
