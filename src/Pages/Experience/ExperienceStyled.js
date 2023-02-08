@@ -4,6 +4,8 @@ export const AboutExperience = styled.p`
   font-size: 16px;
   color: #000000;
   margin: 20px 0px;
+  width: 100%;
+  word-wrap: break-word;
 `;
 
 export const ExperienceDate = styled.p`
@@ -14,10 +16,12 @@ export const ExperienceDate = styled.p`
 export const ExperienceTitle = styled.p`
   color: #1a1a1a;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 900;
 `;
 
 export const ExperienceContainer = styled.div`
+  height: 300px;
+  overflow-y: scroll;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -121,16 +125,16 @@ export const Requirements = styled.p`
   font-size: 14px;
 `;
 export const Option = styled.option`
-width: 371px !important;
-height: 48px;
-`
+  width: 371px !important;
+  height: 48px;
+`;
 export const Select = styled.select`
-width: 371px;
-height: 48px;
-border: ${props=>props.error?props.error:'1px solid #BCBCBC'};
-border-radius: 4px;
-padding: 5px;
-`
+  width: 371px;
+  height: 48px;
+  border: ${(props) => (props.error ? props.error : "1px solid #BCBCBC")};
+  border-radius: 4px;
+  padding: 5px;
+`;
 
 export const Input = styled.input`
   height: 48px;

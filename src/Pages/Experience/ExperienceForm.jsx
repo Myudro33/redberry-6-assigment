@@ -21,10 +21,7 @@ const ExperienceForm = () => {
     <styled.LeftContainer>
       <Navbar title={"გამოცდილება"} page="2/3" />
       {store?.experiences.map((item, index) => (
-        <ExperienceFormComponent
-          index={index}
-          key={index}
-        />
+        <ExperienceFormComponent index={index} key={index} />
       ))}
       <MoreOptionsButton onClick={() => setExperienceInfo()} type="button">
         მეტი გამოცდილების დამატება

@@ -12,25 +12,17 @@ import { StoreContext } from "../../Context/StoreContext";
 
 const EducationForm = () => {
   const navigate = useNavigate();
-  const { store,setEducationsInfo } = useContext(StoreContext);
-  console.log(store)
+  const { store, setEducationsInfo } = useContext(StoreContext);
   const handleSubmit = () => {
-  navigate("/resume")
+    navigate("/resume");
   };
   return (
     <styled.LeftContainer>
       <Navbar page={"3/3"} title="განათლება" />
-
       {store?.educations.map((item, index) => (
-        <EducationFormComponent
-          index={index}
-          key={index}
-        />
+        <EducationFormComponent index={index} key={index} />
       ))}
-      <MoreOptionsButton
-        type="button"
-        onClick={() =>setEducationsInfo()}
-      >
+      <MoreOptionsButton type="button" onClick={() => setEducationsInfo()}>
         სხვა სასწავლებლის დამატება
       </MoreOptionsButton>
       <styled.NavigationContainer style={{ marginTop: "150px" }}>
