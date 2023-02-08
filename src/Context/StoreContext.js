@@ -113,7 +113,7 @@ const StoreContextProvider = (props) => {
         educations: [
           ...prev.educations,
           {
-            id: store.experiences.length,
+            id: store.educations.length,
             institute: "",
             degree: "",
             due_date: "",
