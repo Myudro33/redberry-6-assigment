@@ -9,7 +9,7 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import logo from '../../assets/LOGO-12 1.png'
 
 const Resume = () => {
-  const { store } = useContext(StoreContext);
+  const { store,getDegreeFromId } = useContext(StoreContext);
   const [popUp, setpopUp] = useState(true);
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ const Resume = () => {
           <styled.HeadingTitle>განათლება</styled.HeadingTitle>
           {store?.educations.map((item,index)=>(
             <div key={index} >
-             <styled.Heading>{`${item.institute}, ${" "} ${item.degree_id}`}</styled.Heading>
+             <styled.Heading>{`${item.institute}, ${" "} ${getDegreeFromId(item.degree_id)}`}</styled.Heading>
              <styled.Date>{item.due_date}</styled.Date>
              <styled.AboutEducation>{item.description}</styled.AboutEducation>
             </div>

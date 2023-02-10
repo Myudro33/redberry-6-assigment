@@ -6,7 +6,7 @@ import logo from "../assets/LOGO-12 1.png";
 import { StoreContext } from "../Context/StoreContext.js";
 
 const Resume = () => {
-  const { store } = useContext(StoreContext);
+  const { store,getDegreeFromId } = useContext(StoreContext);
   return (
     <styled.RightContainer>
       <styled.PersonalContainer>
@@ -71,7 +71,7 @@ const Resume = () => {
           <div key={item.id}>
             {item.institute && (
               <styled.ExperienceTitle>
-                {`${item.institute}, ${" "} ${item.degree_id}`}
+                {`${item.institute}, ${" "} ${getDegreeFromId(item.degree_id)}`}
               </styled.ExperienceTitle>
             )}
             <styled.ExperienceDate>{item.due_date}</styled.ExperienceDate>

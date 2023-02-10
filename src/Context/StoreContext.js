@@ -162,6 +162,30 @@ const StoreContextProvider = (props) => {
     return new File([u8arr], filename, { type: mime });
   }
 
+const getDegreeFromId = (id)=>{
+  if(id===1){
+    return 'საშუალო სკოლის დიპლომი'
+  }else if(id ===2){
+    return 'ზოგადსაგანმანათლებლო დიპლომი'
+  }else if(id===3){
+    return 'ბაკალავრი'
+  }else if(id===4){
+    return 'მაგისტრი'
+  }else if(id===5){
+    return 'დოქტორი'
+  }else if(id===6){
+    return 'ასოცირებული ხარისხი'
+  }else if(id===7){
+    return 'სტუდენტი'
+  }else if(id===8){
+    return 'კოლეჯი(ხარისიხს გარეშე)'
+  }else if(id===9){
+    return 'სხვა'
+  }else{
+    return ''
+  }
+}
+
   const getDegreeId = (degree) => {
     if (degree === "საშუალო სკოლის დიპლომი") {
       return 1;
@@ -213,6 +237,7 @@ const StoreContextProvider = (props) => {
         clearLocalStorage,
         getDegreeId,
         submitForm,
+        getDegreeFromId
       }}
     >
       {props.children}
