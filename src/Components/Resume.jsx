@@ -71,7 +71,7 @@ const Resume = () => {
           <div key={item.id}>
             {item.institute && (
               <styled.ExperienceTitle>
-                {`${item.institute}, ${" "} ${item.degree}`}
+                {`${item.institute}, ${" "} ${item.degree_id}`}
               </styled.ExperienceTitle>
             )}
             <styled.ExperienceDate>{item.due_date}</styled.ExperienceDate>

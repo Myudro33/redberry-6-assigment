@@ -9,9 +9,9 @@
   font-weight: 500;
 }
 @font-face {
-  font-family: 'HelveticaNeue';
+  font-family: HelveticaNeue;
   src: url(/src/assets/fonts/HelveticaNeue.ttc) format('truetype');
-  font-weight: 900;
+  font-weight: bolder;
 }
 
 #label {
@@ -38,9 +38,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "HelveticaNeue";
+  font-family: HelveticaNeue;
 }
-
 ::-webkit-scrollbar{
   display: none;
 }

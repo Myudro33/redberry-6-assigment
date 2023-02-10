@@ -16,7 +16,7 @@ const EducationForm = () => {
   const handleSubmit = () => {
     submitForm()
     console.log(store)
-    // navigate("/resume");
+    navigate("/resume");
   };
   return (
     <styled.LeftContainer>
