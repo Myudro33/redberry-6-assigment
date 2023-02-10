@@ -3,6 +3,8 @@ import * as styled from "../Pages/Experience/ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { StoreContext } from "../Context/StoreContext";
+import warning from '../assets/warning.png'
+import success from '../assets/success.png'
 
 const ExperienceFormComponent = ({index}) => {
   const { store, updateExpeiencesInfo } = useContext(StoreContext);
@@ -50,6 +52,12 @@ const ExperienceFormComponent = ({index}) => {
             formik.errors.position && formik.touched.position && "1px solid red"
           }
         />
+           {formik.touched.position && (
+              <styled.ValidationIcon
+                src={formik.errors.position && formik.touched.position?warning:success}
+                alt=""
+              />
+            )}
         <styled.Requirements
           color={formik.errors.position && formik.touched.position && "red"}
         >
@@ -74,6 +82,12 @@ const ExperienceFormComponent = ({index}) => {
             formik.errors.employer && formik.touched.employer && "1px solid red"
           }
         />
+          {formik.touched.employer && (
+              <styled.ValidationIcon
+                src={formik.errors.employer && formik.touched.employer?warning:success}
+                alt=""
+              />
+            )}
         <styled.Requirements
           color={formik.errors.employer && formik.touched.employer && "red"}
         >
@@ -136,6 +150,12 @@ const ExperienceFormComponent = ({index}) => {
             "1px solid red"
           }
         />
+          {formik.touched.description && (
+              <styled.ValidationIcon
+                src={formik.errors.description && formik.touched.description?warning:success}
+                alt=""
+              />
+            )}
       </styled.Label>
       <styled.Hr />
     </styled.Form>

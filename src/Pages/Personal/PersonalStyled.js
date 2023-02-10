@@ -1,35 +1,31 @@
 import styled from "styled-components";
 
-
-
-
-
 export const AbsoluteImage = styled.img`
- width: 42px;
- height: 42px;
- position: absolute;
- bottom: 40px;
-`
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  bottom: 40px;
+`;
 
 export const PersonalImage = styled.img`
- width: 246px;
- height: 246px;
- border-radius: 50%;
- border: 1px solid black;
-`
+  width: 246px;
+  height: 246px;
+  border-radius: 50%;
+  border: 1px solid black;
+`;
 export const AboutMySelf = styled.p`
-font-size: 16px;
- color: #000000;
- width: 430px;
-`
+  font-size: 16px;
+  color: #000000;
+  width: 430px;
+`;
 
 export const Contact = styled.p`
- color: #1A1A1A;
- font-size: 18px;
- display: flex;
- align-items:center;
- margin: 5px 0px;
-`
+  color: #1a1a1a;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin: 5px 0px;
+`;
 
 export const NameTitle = styled.h1`
   color: #f93b1d;
@@ -62,15 +58,12 @@ export const RightContainer = styled.div`
 
 //  მარცხენა მხარე !!!
 
-
-
-
 export const NavigationContainer = styled.div`
-width: 100%;
-display: flex;
-justify-content: flex-end;
-margin-top: 130px;
-`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 130px;
+`;
 
 export const Textarea = styled.textarea`
   width: 100%;
@@ -86,20 +79,28 @@ export const Textarea = styled.textarea`
 `;
 
 export const FileTitle = styled.h1`
-  color: ${props=>props.error?props.error:'#1a1a1a'};
+  color: ${(props) => (props.error ? props.error : "#1a1a1a")};
   font-size: 18px;
   font-weight: 900;
 `;
 export const FileUploadContainer = styled.div`
-  width: 100%;
+  width: 50%;
   height: 20px;
   margin-top: 30px;
   display: flex;
   align-items: center;
+  position: relative;
+`;
+
+export const ValidationIcon = styled.img`
+  width: 15px;
+  position: absolute;
+  right: 10px;
+  top: 40px;
 `;
 
 export const Requirements = styled.p`
-  color: ${props=>props.color?props.color:'#2e2e2e'};
+  color: ${(props) => (props.color ? props.color : "#2e2e2e")};
   font-weight: 300;
   font-size: 14px;
 `;
@@ -118,11 +119,12 @@ export const Input = styled.input`
 `;
 
 export const Label = styled.label`
-  color: ${props=>props.color?props.color:'#000'};
+  color: ${(props) => (props.color ? props.color : "#000")};
   display: flex;
   flex-direction: column;
   font-size: 16px;
   font-weight: 600;
+  position: relative;
 `;
 
 export const NameContainer = styled.div`

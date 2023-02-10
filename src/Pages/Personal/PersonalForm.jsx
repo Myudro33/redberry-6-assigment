@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { StoreContext } from "../../Context/StoreContext";
+import warning from "../../assets/warning.png";
+import success from "../../assets/success.png";
 const PersonalForm = () => {
   const { setPersonalInfo, store } = useContext(StoreContext);
   const [file, setfile] = useState(store.file);
@@ -85,6 +87,12 @@ const PersonalForm = () => {
                 formik.errors.name && formik.touched.name && "1px solid red"
               }
             />
+            {formik.touched.name && (
+              <styled.ValidationIcon
+                src={formik.errors.name && formik.touched.name?warning:success}
+                alt=""
+              />
+            )}
             <styled.Requirements
               color={formik.errors.name && formik.touched.name && "red"}
             >
@@ -111,6 +119,12 @@ const PersonalForm = () => {
                 "1px solid red"
               }
             />
+               {formik.touched.surname && (
+              <styled.ValidationIcon
+                src={formik.errors.surname && formik.touched.surname?warning:success}
+                alt=""
+              />
+            )}
             <styled.Requirements
               color={formik.errors.surname && formik.touched.surname && "red"}
             >
@@ -138,6 +152,13 @@ const PersonalForm = () => {
             type="file"
             id="upload-photo"
           />
+             {formik.touched.image && (
+              <styled.ValidationIcon
+              style={{top:5}}
+                src={formik.errors.image && formik.touched.image?warning:success}
+                alt=""
+              />
+            )}
         </styled.FileUploadContainer>
         <styled.Label style={{ marginTop: "50px" }}>
           ჩემს შესახებ (არასავალდებულო)
@@ -166,6 +187,12 @@ const PersonalForm = () => {
               formik.errors.email && formik.touched.email && "1px solid red"
             }
           />
+             {formik.touched.email && (
+              <styled.ValidationIcon
+                src={formik.errors.email && formik.touched.email?warning:success}
+                alt=""
+              />
+            )}
           <styled.Requirements
             color={formik.errors.email && formik.touched.email && "red"}
           >
@@ -193,6 +220,12 @@ const PersonalForm = () => {
               "1px solid red"
             }
           />
+             {formik.touched.phone_number && (
+              <styled.ValidationIcon
+                src={formik.errors.phone_number && formik.touched.phone_number?warning:success}
+                alt=""
+              />
+            )}
           <styled.Requirements
             color={
               formik.errors.phone_number && formik.touched.phone_number && "red"

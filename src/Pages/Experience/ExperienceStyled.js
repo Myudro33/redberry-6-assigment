@@ -38,6 +38,7 @@ export const PersonalImage = styled.img`
   width: 246px;
   height: 246px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 export const AboutMySelf = styled.p`
   font-size: 16px;
@@ -136,6 +137,12 @@ export const Select = styled.select`
   padding: 5px;
 `;
 
+export const ValidationIcon = styled.img`
+  width: 15px;
+  position: absolute;
+  right: 10px;
+  top: 40px;
+`;
 export const Input = styled.input`
   height: 48px;
   width: ${(props) => props.width};
@@ -156,6 +163,7 @@ export const Label = styled.label`
   font-size: 16px;
   font-weight: 600;
   margin: 15px 0px;
+  position: relative;
 `;
 
 export const Form = styled.form`

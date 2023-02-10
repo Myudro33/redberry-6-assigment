@@ -40,3 +40,7 @@
   box-sizing: border-box;
   font-family: "HelveticaNeue";
 }
+
+::-webkit-scrollbar{
+  display: none;
+}

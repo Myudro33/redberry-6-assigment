@@ -4,6 +4,8 @@ import * as styled from "../Pages/Experience/ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { StoreContext } from "../Context/StoreContext";
+import warning from '../assets/warning.png'
+import success from '../assets/success.png'
 
 const EducationFormComponent = ({ index }) => {
   const [degrees, setdegrees] = useState();
@@ -56,6 +58,12 @@ const EducationFormComponent = ({ index }) => {
             "1px solid red"
           }
         />
+          {formik.touched.institute && (
+              <styled.ValidationIcon
+                src={formik.errors.institute && formik.touched.institute?warning:success}
+                alt=""
+              />
+            )}
         <styled.Requirements
           color={formik.errors.institute && formik.touched.institute && "red"}
         >
@@ -124,6 +132,12 @@ const EducationFormComponent = ({ index }) => {
             "1px solid red"
           }
         />
+          {formik.touched.description && (
+              <styled.ValidationIcon
+                src={formik.errors.description && formik.touched.description?warning:success}
+                alt=""
+              />
+            )}
       </styled.Label>
       <styled.Hr />
     </styled.Form>
