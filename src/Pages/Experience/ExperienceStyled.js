@@ -20,8 +20,6 @@ export const ExperienceTitle = styled.p`
 `;
 
 export const ExperienceContainer = styled.div`
-  height: 300px;
-  overflow-y: scroll;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -71,17 +69,17 @@ export const PersonalInfoContainer = styled.div`
 
 export const PersonalContainer = styled.div`
   width: 100%;
-  height: 300px;
   display: flex;
   justify-content: space-between;
+  margin: 0px 0px 20px 0px;
 `;
 
 export const RightContainer = styled.div`
   width: 822px;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 80px 50px;
+  position: relative;
 `;
 
 // მარცხენა მხარე
