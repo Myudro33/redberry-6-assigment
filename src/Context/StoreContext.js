@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
 const initStore = {
@@ -19,15 +20,16 @@ const initStore = {
     {
       id: 0,
       institute: "",
-      degree: "",
       due_date: "",
       description: "",
+      degree_id: "",
     },
   ],
   image: "",
   about_me: "",
   file: "",
 };
+const formData = new FormData();
 
 const getInitialState = () => {
   const store = localStorage.getItem("store");
@@ -44,7 +46,7 @@ const StoreContextProvider = (props) => {
   }, [store]);
 
   const clearLocalStorage = () => {
-    setstore(initStore)
+    setstore(initStore);
   };
   const updateExpeiencesInfo = (info, index) => {
     setstore((prev) => {
@@ -73,7 +75,7 @@ const StoreContextProvider = (props) => {
           return {
             ...obj,
             institute: info?.institute,
-            degree: info?.degree,
+            degree_id: getDegreeId(info?.degree_id),
             due_date: info?.due_date,
             description: info?.description,
           };
@@ -82,7 +84,7 @@ const StoreContextProvider = (props) => {
       });
       return { ...prev, educations: newStore };
     });
-    localStorage.setItem("store", JSON.stringify(store));
+    localStorage.setItem("store", store);
   };
 
   const setExperienceInfo = () => {
@@ -115,7 +117,7 @@ const StoreContextProvider = (props) => {
           {
             id: store.educations.length,
             institute: "",
-            degree: "",
+            degree_id: "",
             due_date: "",
             description: "",
           },
@@ -133,7 +135,10 @@ const StoreContextProvider = (props) => {
         name: info?.name,
         surname: info?.surname,
         email: info?.email,
-        image: info?.image,
+        image: dataURLtoFile(
+          "data:image/png;base64,aGVsbG8gd29ybGQ=",
+          info?.image
+        ),
         phone_number: info?.phone_number,
         about_me: info?.about_me,
         file: info?.file,
@@ -142,6 +147,60 @@ const StoreContextProvider = (props) => {
       return newStore;
     });
   };
+
+  function dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+  }
+
+  const getDegreeId = (degree) => {
+    if (degree === "საშუალო სკოლის დიპლომი") {
+      return 1;
+    } else if (degree === "ზოგადსაგანმანათლებლო დიპლომი") {
+      return 2;
+    } else if (degree === "ბაკალავრი") {
+      return 3;
+    } else if (degree === "მაგისტრი") {
+      return 4;
+    } else if (degree === "დოქტორი") {
+      return 5;
+    } else if (degree === "ასოცირებული ხარისხი") {
+      return 6;
+    } else if (degree === "სტუდენტი") {
+      return 7;
+    } else if (degree === "კოლეჯი(ხარისიხს გარეშე)") {
+      return 8;
+    } else if (degree === "სხვა") {
+      return 9;
+    }
+  };
+  const submitForm = async() => {
+    formData.append("name", store.name);
+    formData.append("surname", store.surname);
+    formData.append("email", store.email);
+    formData.append("phone_number", store.phone_number);
+    formData.append("experiences", JSON.stringify(store.experiences));
+    formData.append("educations", JSON.stringify(store.educations));
+    formData.append("image", store.image);
+    formData.append("about_me", store.about_me);
+    const config = {
+      headers: { "content-type": "multipart/form-data" },
+    };
+       const response = await axios.post("https://resume.redberryinternship.ge/api/cvs", formData, config)
+      .then((resp) => resp)
+      .catch((error) => alert(JSON.stringify(error.response.data.errors)));
+      return response
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -152,6 +211,8 @@ const StoreContextProvider = (props) => {
         setEducationsInfo,
         updateEducationsInfo,
         clearLocalStorage,
+        getDegreeId,
+        submitForm,
       }}
     >
       {props.children}

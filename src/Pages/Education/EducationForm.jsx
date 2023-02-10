@@ -12,9 +12,11 @@ import { StoreContext } from "../../Context/StoreContext";
 
 const EducationForm = () => {
   const navigate = useNavigate();
-  const { store, setEducationsInfo } = useContext(StoreContext);
+  const { store, setEducationsInfo,submitForm } = useContext(StoreContext);
   const handleSubmit = () => {
-    navigate("/resume");
+    submitForm()
+    console.log(store)
+    // navigate("/resume");
   };
   return (
     <styled.LeftContainer>

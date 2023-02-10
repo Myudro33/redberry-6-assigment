@@ -17,7 +17,7 @@ const PersonalForm = () => {
       email: store?.email,
       phone_number: store?.phone_number,
       about_me: store?.about_me,
-      image: store.image,
+      image: store?.image,
       file: file,
     },
     validationSchema: Yup.object({
@@ -35,7 +35,7 @@ const PersonalForm = () => {
         .required("სავალდებულო"),
       phone_number: Yup.string()
         .matches(
-          /^\+995\s5\d{2}\s\d{2}\s\d{2}\s\d{2}$/,
+          /^(\+995)?(5[0-9]{8})$/,
           "უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს"
         )
         .required("სავალდებულო"),

@@ -1,6 +1,17 @@
 @font-face {
-  font-family: "HelveticaNeue";
-  src: url("./assets/HelveticaNeue.ttc");
+  font-family: 'HelveticaNeue';
+  src: url(/src/assets/fonts/HelveticaNeue.ttc) format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url(/src/assets/fonts/HelveticaNeue.ttc) format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url(/src/assets/fonts/HelveticaNeue.ttc) format('truetype');
+  font-weight: 900;
 }
 
 #label {

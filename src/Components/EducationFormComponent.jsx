@@ -5,22 +5,24 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { StoreContext } from "../Context/StoreContext";
 
-const EducationFormComponent = ({index}) => {
+const EducationFormComponent = ({ index }) => {
   const [degrees, setdegrees] = useState();
-  const {store,updateEducationsInfo} = useContext(StoreContext)
+  const { store, updateEducationsInfo} = useContext(StoreContext);
   useEffect(() => {
     getDegrees(setdegrees);
   }, []);
   const formik = useFormik({
     initialValues: {
       institute: store?.educations[index].institute,
-      degree: store?.educations[index].degree,
+      degree_id: store?.educations[index].degree_id,
       due_date: store?.educations[index].due_date,
       description: store?.educations[index].description,
     },
     validationSchema: Yup.object({
-      institute: Yup.string().min(2, "მინიმუმ 2 სიმბოლო").required("სავალდებულო"),
-      degree: Yup.string().required("სავალდებულო"),
+      institute: Yup.string()
+        .min(2, "მინიმუმ 2 სიმბოლო")
+        .required("სავალდებულო"),
+      degree_id: Yup.string().required("სავალდებულო"),
       due_date: Yup.string().required("სავალდებულო"),
       description: Yup.string().required("სავალდებულო"),
     }),
@@ -29,9 +31,10 @@ const EducationFormComponent = ({index}) => {
     },
   });
 
-useEffect(()=>{
-updateEducationsInfo(formik.values,index)
-},[formik.values])
+  useEffect(() => {
+    updateEducationsInfo(formik.values, index);
+  }, [formik.values]);
+
 
   return (
     <styled.Form>
@@ -48,7 +51,9 @@ updateEducationsInfo(formik.values,index)
           width="100%"
           placeholder="სასწავლებელი"
           border={
-            formik.errors.institute && formik.touched.institute && "1px solid red"
+            formik.errors.institute &&
+            formik.touched.institute &&
+            "1px solid red"
           }
         />
         <styled.Requirements
@@ -61,16 +66,18 @@ updateEducationsInfo(formik.values,index)
       </styled.Label>
       <styled.DateContainer>
         <styled.Label
-          color={formik.errors.degree && formik.touched.degree && "red"}
+          color={formik.errors.degree_id && formik.touched.degree_id && "red"}
         >
           ხარისხი
           <styled.Select
-            value={formik.values.degree}
-            name="degree"
+            value={formik.values.degree_id}
+            name="degree_id"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={
-              formik.errors.degree && formik.touched.degree && "1px solid red"
+              formik.errors.degree_id &&
+              formik.touched.degree_id &&
+              "1px solid red"
             }
           >
             <styled.Option selected>აირჩიეთ ხარისხი</styled.Option>
@@ -93,15 +100,15 @@ updateEducationsInfo(formik.values,index)
             type={"date"}
             width="371px"
             border={
-              formik.errors.due_date && formik.touched.due_date && "1px solid red"
+              formik.errors.due_date &&
+              formik.touched.due_date &&
+              "1px solid red"
             }
           />
         </styled.Label>
       </styled.DateContainer>
       <styled.Label
-        color={
-          formik.errors.description && formik.touched.description && "red"
-        }
+        color={formik.errors.description && formik.touched.description && "red"}
       >
         აღწერა
         <styled.Textarea

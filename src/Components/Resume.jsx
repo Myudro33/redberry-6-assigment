@@ -75,7 +75,7 @@ const Resume = () => {
               </styled.ExperienceTitle>
             )}
             <styled.ExperienceDate>{item.due_date}</styled.ExperienceDate>
-            <styled.AboutExperience style={{ width: "662px" }}>
+            <styled.AboutExperience>
               {item.description}
             </styled.AboutExperience>
           </div>

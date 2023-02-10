@@ -4,7 +4,7 @@ export const AboutExperience = styled.p`
   font-size: 16px;
   color: #000000;
   margin: 20px 0px;
-  width: 100%;
+  width: 600px;
   word-wrap: break-word;
 `;
 
