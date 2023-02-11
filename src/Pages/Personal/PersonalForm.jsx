@@ -9,7 +9,7 @@ import { StoreContext } from "../../Context/StoreContext";
 import warning from "../../assets/warning.png";
 import success from "../../assets/success.png";
 const PersonalForm = () => {
-  const { setPersonalInfo, store } = useContext(StoreContext);
+  const { setPersonalInfo, store,setstore } = useContext(StoreContext);
   const [file, setfile] = useState(store.file);
   const navigate = useNavigate();
   const formik = useFormik({
@@ -31,7 +31,7 @@ const PersonalForm = () => {
         .min(2, "მინიმუმ 2 ასო")
         .matches(/^[\u10A0-\u10FF]+$/, "მხოლოდ ქართული ასოები")
         .required("სავალდებულო"),
-      image: Yup.string().required("სავალდებულო"),
+      file: Yup.string().required("სავალდებულო"),
       email: Yup.string()
         .matches(/.*\@redberry.ge$/, "უნდა მთავრდებოდეს @redberry.ge-ით")
         .required("სავალდებულო"),
@@ -47,7 +47,6 @@ const PersonalForm = () => {
       navigate("/experience");
     },
   });
-
   useEffect(() => {
     setPersonalInfo(formik.values);
   }, [formik.values]);
@@ -58,6 +57,12 @@ const PersonalForm = () => {
     );
     setfile(objectUrl);
     formik.initialValues.file = objectUrl;
+    const selectedFile = e.target.files[0]
+    const reader = new FileReader();
+    reader.onloadend = () =>{
+      setstore({...store,image:reader.result.toString()})
+    }
+    reader.readAsDataURL(selectedFile)
     return () => URL.revokeObjectURL(objectUrl);
   };
 
@@ -136,7 +141,7 @@ const PersonalForm = () => {
         </styled.NameContainer>
         <styled.FileUploadContainer>
           <styled.FileTitle
-            error={formik.errors.image && formik.touched.image && "red"}
+            error={formik.errors.file && formik.touched.file && "red"}
           >
             პირადი ფოტოს ატვირთვა
           </styled.FileTitle>
@@ -144,7 +149,6 @@ const PersonalForm = () => {
             ატვირთვა
           </label>
           <input
-            onChange={formik.handleChange}
             onChangeCapture={(e) => handleChange(e)}
             onBlur={formik.handleBlur}
             value={undefined}
@@ -152,10 +156,10 @@ const PersonalForm = () => {
             type="file"
             id="upload-photo"
           />
-             {formik.touched.image && (
+             {formik.touched.file && (
               <styled.ValidationIcon
               style={{top:5}}
-                src={formik.errors.image && formik.touched.image?warning:success}
+                src={formik.errors.file && formik.touched.file?warning:success}
                 alt=""
               />
             )}

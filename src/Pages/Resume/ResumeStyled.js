@@ -132,6 +132,7 @@ export const NavigateHomeWrapper = styled.div`
   position: absolute;
   left: 40px;
   top: 40px;
+  cursor: pointer;
 `;
 export const Container = styled.div`
   width: 100vw;

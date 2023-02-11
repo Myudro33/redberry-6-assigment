@@ -39,7 +39,7 @@ export const StoreContext = createContext();
 
 const StoreContextProvider = (props) => {
   const [store, setstore] = useState(getInitialState);
-const [imageAsFile, setimageAsFile] = useState()
+  const [imageAsFile, setimageAsFile] = useState();
 
   useEffect(() => {
     localStorage.setItem("store", JSON.stringify(store));
@@ -135,7 +135,7 @@ const [imageAsFile, setimageAsFile] = useState()
         name: info?.name,
         surname: info?.surname,
         email: info?.email,
-        image: imageAsFile,
+        image: info?.image,
         phone_number: info?.phone_number,
         about_me: info?.about_me,
         file: info?.file,
@@ -145,56 +145,49 @@ const [imageAsFile, setimageAsFile] = useState()
     });
   };
 
-  function dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(","),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
+  function urltoFile(url, filename, mimeType) {
+    return fetch(url)
+      .then(function (res) {
+        return res.arrayBuffer();
+      })
+      .then(function (buf) {
+        return new File([buf], filename, { type: mimeType });
+      });
+  }
 
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
+  const getFileFromBase64 = async () => {
+    if (store.image !== "") {
+      const newFile = await urltoFile(store.image, "CV image", "image/png");
+       setimageAsFile(newFile)
     }
+  };
+  useEffect(() => {
+    getFileFromBase64()
+  }, [store.image]);
 
-    return new File([u8arr], filename, { type: mime });
-  }
-
-const imageFile = () =>{
-  fetch(dataURLtoFile(
-    "data:image/png;base64,aGVsbG8gd29ybGQ=",
-    store?.image
-  )).then((res)=>res.blob()).then((blob)=>{
-    const newImage = new File([blob], "File Name", {type:'image/png'})
-    setimageAsFile(newImage)
-  })
-}
-useEffect(()=>{
-  imageFile()
-},[store.image])
-
-const getDegreeFromId = (id)=>{
-  if(id===1){
-    return 'საშუალო სკოლის დიპლომი'
-  }else if(id ===2){
-    return 'ზოგადსაგანმანათლებლო დიპლომი'
-  }else if(id===3){
-    return 'ბაკალავრი'
-  }else if(id===4){
-    return 'მაგისტრი'
-  }else if(id===5){
-    return 'დოქტორი'
-  }else if(id===6){
-    return 'ასოცირებული ხარისხი'
-  }else if(id===7){
-    return 'სტუდენტი'
-  }else if(id===8){
-    return 'კოლეჯი(ხარისიხს გარეშე)'
-  }else if(id===9){
-    return 'სხვა'
-  }else{
-    return ''
-  }
-}
+  const getDegreeFromId = (id) => {
+    if (id === 1) {
+      return "საშუალო სკოლის დიპლომი";
+    } else if (id === 2) {
+      return "ზოგადსაგანმანათლებლო დიპლომი";
+    } else if (id === 3) {
+      return "ბაკალავრი";
+    } else if (id === 4) {
+      return "მაგისტრი";
+    } else if (id === 5) {
+      return "დოქტორი";
+    } else if (id === 6) {
+      return "ასოცირებული ხარისხი";
+    } else if (id === 7) {
+      return "სტუდენტი";
+    } else if (id === 8) {
+      return "კოლეჯი(ხარისიხს გარეშე)";
+    } else if (id === 9) {
+      return "სხვა";
+    } else {
+      return "";
+    }
+  };
 
   const getDegreeId = (degree) => {
     if (degree === "საშუალო სკოლის დიპლომი") {
@@ -217,22 +210,23 @@ const getDegreeFromId = (id)=>{
       return 9;
     }
   };
-  const submitForm = async() => {
+  const submitForm = async () => {
     formData.append("name", store.name);
     formData.append("surname", store.surname);
     formData.append("email", store.email);
     formData.append("phone_number", store.phone_number);
     formData.append("experiences", JSON.stringify(store.experiences));
     formData.append("educations", JSON.stringify(store.educations));
-    formData.append("image", store.image);
+    formData.append("image", imageAsFile);
     formData.append("about_me", store.about_me);
     const config = {
       headers: { "content-type": "multipart/form-data" },
     };
-       const response = await axios.post("https://resume.redberryinternship.ge/api/cvs", formData, config)
+    const response = await axios
+      .post("https://resume.redberryinternship.ge/api/cvs", formData, config)
       .then((resp) => resp)
       .catch((error) => alert(JSON.stringify(error.response.data.errors)));
-      return response
+    return response;
   };
 
   return (
@@ -240,6 +234,7 @@ const getDegreeFromId = (id)=>{
       value={{
         setPersonalInfo,
         store,
+        setstore,
         setExperienceInfo,
         updateExpeiencesInfo,
         setEducationsInfo,
@@ -247,7 +242,7 @@ const getDegreeFromId = (id)=>{
         clearLocalStorage,
         getDegreeId,
         submitForm,
-        getDegreeFromId
+        getDegreeFromId,
       }}
     >
       {props.children}
