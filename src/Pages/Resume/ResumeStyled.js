@@ -96,6 +96,7 @@ export const PersonalContainer = styled.div`
 
 export const Wrapper = styled.div`
   width: 822px;
+  min-height: 100vh;
   height: auto;
   border: 1px solid black;
   padding: 80px 60px;

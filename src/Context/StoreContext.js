@@ -8,7 +8,7 @@ const initStore = {
   phone_number: "",
   experiences: [
     {
-      id: 0,
+      // id: 0,
       position: "",
       employer: "",
       start_date: "",
@@ -18,7 +18,7 @@ const initStore = {
   ],
   educations: [
     {
-      id: 0,
+      // id: 0,
       institute: "",
       due_date: "",
       description: "",
@@ -135,7 +135,7 @@ const StoreContextProvider = (props) => {
         name: info?.name,
         surname: info?.surname,
         email: info?.email,
-        image: info?.image,
+        image: store?.image,
         phone_number: info?.phone_number,
         about_me: info?.about_me,
         file: info?.file,
@@ -163,7 +163,7 @@ const StoreContextProvider = (props) => {
   };
   useEffect(() => {
     getFileFromBase64()
-  }, [store.image]);
+  }, [store]);
 
   const getDegreeFromId = (id) => {
     if (id === 1) {
@@ -229,6 +229,21 @@ const StoreContextProvider = (props) => {
     return response;
   };
 
+const getImageBase64 = (e,setfile,formik) =>{
+  const objectUrl = URL.createObjectURL(
+    new Blob([e.target.files[0]], { type: "image/png" })
+  );
+  setfile(objectUrl);
+  formik.initialValues.file = objectUrl;
+  setstore({...store,file:objectUrl})
+  const selectedFile = e.target.files[0]
+  const reader = new FileReader();
+  reader.onloadend = () =>{
+    setstore({...store,image:reader.result.toString()})
+  }
+  reader.readAsDataURL(selectedFile)
+  return () => URL.revokeObjectURL(objectUrl);
+}
   return (
     <StoreContext.Provider
       value={{
@@ -243,6 +258,7 @@ const StoreContextProvider = (props) => {
         getDegreeId,
         submitForm,
         getDegreeFromId,
+        getImageBase64
       }}
     >
       {props.children}

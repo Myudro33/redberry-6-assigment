@@ -9,7 +9,7 @@ import { StoreContext } from "../../Context/StoreContext";
 import warning from "../../assets/warning.png";
 import success from "../../assets/success.png";
 const PersonalForm = () => {
-  const { setPersonalInfo, store,setstore } = useContext(StoreContext);
+  const { setPersonalInfo, store,getImageBase64 } = useContext(StoreContext);
   const [file, setfile] = useState(store.file);
   const navigate = useNavigate();
   const formik = useFormik({
@@ -50,22 +50,6 @@ const PersonalForm = () => {
   useEffect(() => {
     setPersonalInfo(formik.values);
   }, [formik.values]);
-
-  const handleChange = (e) => {
-    const objectUrl = URL.createObjectURL(
-      new Blob([e.target.files[0]], { type: "image/png" })
-    );
-    setfile(objectUrl);
-    formik.initialValues.file = objectUrl;
-    const selectedFile = e.target.files[0]
-    const reader = new FileReader();
-    reader.onloadend = () =>{
-      setstore({...store,image:reader.result.toString()})
-    }
-    reader.readAsDataURL(selectedFile)
-    return () => URL.revokeObjectURL(objectUrl);
-  };
-
   useEffect(() => {
     formik.values.file = file;
     setPersonalInfo(formik.initialValues);
@@ -149,7 +133,7 @@ const PersonalForm = () => {
             ატვირთვა
           </label>
           <input
-            onChangeCapture={(e) => handleChange(e)}
+            onChangeCapture={(e) => getImageBase64(e,setfile,formik)}
             onBlur={formik.handleBlur}
             value={undefined}
             name="image"
