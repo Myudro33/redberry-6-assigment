@@ -22,6 +22,11 @@ border-radius: 4px;
 font-size: 16px;
 border: none;
 margin: 20px 51% 20px 0px;
+transition: .3s;
+&:hover{
+  background-color: #76B2F9;
+  cursor: pointer;
+}
 `
 
 

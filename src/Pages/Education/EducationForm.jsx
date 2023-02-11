@@ -14,9 +14,15 @@ const EducationForm = () => {
   const navigate = useNavigate();
   const { store, setEducationsInfo,submitForm } = useContext(StoreContext);
   const handleSubmit = () => {
-    submitForm()
-    console.log(store)
-    navigate("/resume");
+    const ValuesNotEmpty = store.educations.every((obj)=>{
+      return Object.values(obj).every(val=>val!=="")
+    })
+    if(ValuesNotEmpty){
+      submitForm()
+      navigate("/resume");
+    }else{
+      alert('გთხოვთ შეავსოთ ყველა ველი')
+    }
   };
   return (
     <styled.LeftContainer>

@@ -30,7 +30,6 @@ const initStore = {
   file: "",
 };
 const formData = new FormData();
-
 const getInitialState = () => {
   const store = localStorage.getItem("store");
   return store ? JSON.parse(store) : initStore;
@@ -40,6 +39,7 @@ export const StoreContext = createContext();
 
 const StoreContextProvider = (props) => {
   const [store, setstore] = useState(getInitialState);
+const [imageAsFile, setimageAsFile] = useState()
 
   useEffect(() => {
     localStorage.setItem("store", JSON.stringify(store));
@@ -135,10 +135,7 @@ const StoreContextProvider = (props) => {
         name: info?.name,
         surname: info?.surname,
         email: info?.email,
-        image: dataURLtoFile(
-          "data:image/png;base64,aGVsbG8gd29ybGQ=",
-          info?.image
-        ),
+        image: imageAsFile,
         phone_number: info?.phone_number,
         about_me: info?.about_me,
         file: info?.file,
@@ -161,6 +158,19 @@ const StoreContextProvider = (props) => {
 
     return new File([u8arr], filename, { type: mime });
   }
+
+const imageFile = () =>{
+  fetch(dataURLtoFile(
+    "data:image/png;base64,aGVsbG8gd29ybGQ=",
+    store?.image
+  )).then((res)=>res.blob()).then((blob)=>{
+    const newImage = new File([blob], "File Name", {type:'image/png'})
+    setimageAsFile(newImage)
+  })
+}
+useEffect(()=>{
+  imageFile()
+},[store.image])
 
 const getDegreeFromId = (id)=>{
   if(id===1){

@@ -14,7 +14,14 @@ const ExperienceForm = () => {
   const navigate = useNavigate();
 
   const handleSubmitMyForm = () => {
-    navigate("/education");
+    const ValuesNotEmpty = store.experiences.every((obj)=>{
+      return Object.values(obj).every(val=>val!=="")
+    })
+    if(ValuesNotEmpty){
+      navigate("/education");
+    }else{
+      alert('გთხოვთ შეავსოთ ყველა ველი')
+    }
   };
 
   return (
