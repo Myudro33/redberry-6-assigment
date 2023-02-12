@@ -99,7 +99,7 @@ const EducationFormComponent = ({ index }) => {
                 : "2px solid #bcbcbc"
             }
           >
-            <styled.Option selected disabled>
+            <styled.Option value=''>
               აირჩიეთ ხარისხი
             </styled.Option>
             {degrees?.map((degree) => (
