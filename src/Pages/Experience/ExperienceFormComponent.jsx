@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import * as styled from "./ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";

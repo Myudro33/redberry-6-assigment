@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import * as styled from "../Pages/Experience/ExperienceStyled.js";
 import { FiAtSign } from "react-icons/fi";
 import { BsFillTelephoneFill } from "react-icons/bs";

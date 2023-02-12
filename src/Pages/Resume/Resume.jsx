@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,useState } from "react";
 import { StoreContext } from "../../Context/StoreContext";
 import { useNavigate } from "react-router-dom";
 import * as styled from "./ResumeStyled.js";
@@ -26,11 +26,11 @@ const Resume = () => {
               {`${store.name} ${" "} ${store.surname}`}
             </styled.PersonalTitle>
             <styled.ContactTitle>
-              <FiAtSign style={{ marginRight: "10px" }} />
+              <FiAtSign style={{ marginRight: "10px",color:'#bcbcbc' }} />
               {store.email}
             </styled.ContactTitle>
             <styled.ContactTitle>
-              <BsFillTelephoneFill style={{ marginRight: "10px" }} />
+              <BsFillTelephoneFill style={{ marginRight: "10px",color:'#bcbcbc' }} />
               {store.phone_number}
             </styled.ContactTitle>
             <styled.HeadingTitle>ჩემს შესახებ</styled.HeadingTitle>
@@ -72,7 +72,7 @@ const Resume = () => {
             onClick={() => setpopUp(false)}
             style={{ alignSelf: "flex-end", fontSize: "30px",cursor:'pointer' }}
           />
-          <styled.PopUpTitle>რეზიუმე წარმატებით გაიგზავნა 🎉</styled.PopUpTitle>
+          <styled.PopUpTitle>რეზიუმე წარმატებით არ გაიგზავნა :)🎉</styled.PopUpTitle>
         </styled.PopUpContainer>
       )}
     </styled.Container>

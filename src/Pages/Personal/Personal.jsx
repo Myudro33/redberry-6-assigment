@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as styled from "./PersonalStyled";
 import Resume from "../../Components/Resume";
 import PersonalForm from "./PersonalForm";

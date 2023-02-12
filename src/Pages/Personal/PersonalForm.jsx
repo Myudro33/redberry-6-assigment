@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as styled from "./PersonalStyled";
 import Navbar from "../../Components/Navbar";
-import { Button,ValidationIcon } from "../../Components/GlobalStyledComponents";
+import {
+  Button,
+  ValidationIcon,
+} from "../../Components/GlobalStyledComponents";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -9,7 +12,7 @@ import { StoreContext } from "../../Context/StoreContext";
 import warning from "../../assets/warning.png";
 import success from "../../assets/success.png";
 const PersonalForm = () => {
-  const { setPersonalInfo, store,getImageBase64 } = useContext(StoreContext);
+  const { setPersonalInfo, store, getImageBase64 } = useContext(StoreContext);
   const [file, setfile] = useState(store.file);
   const navigate = useNavigate();
   const formik = useFormik({
@@ -72,12 +75,22 @@ const PersonalForm = () => {
               type={"text"}
               placeholder="ანზორ"
               width={"371px"}
-              border={formik.touched.name?formik.errors.name?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
+              border={
+                formik.touched.name
+                  ? formik.errors.name
+                    ? "1px solid #EF5050"
+                    : "1px solid #98E37E"
+                  : "2px solid #bcbcbc"
+              }
             />
             {formik.touched.name && (
               <ValidationIcon
-                validate={formik.errors.name && formik.touched.name?false:true}
-                src={formik.errors.name && formik.touched.name?warning:success}
+                validate={
+                  formik.errors.name && formik.touched.name ? false : true
+                }
+                src={
+                  formik.errors.name && formik.touched.name ? warning : success
+                }
                 alt="validation"
               />
             )}
@@ -101,12 +114,24 @@ const PersonalForm = () => {
               type={"text"}
               placeholder="მუმლაძე"
               width={"371px"}
-              border={formik.touched.surname?formik.errors.surname?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
+              border={
+                formik.touched.surname
+                  ? formik.errors.surname
+                    ? "1px solid #EF5050"
+                    : "1px solid #98E37E"
+                  : "2px solid #bcbcbc"
+              }
             />
-               {formik.touched.surname && (
+            {formik.touched.surname && (
               <ValidationIcon
-              validate={formik.errors.surname && formik.touched.surname?false:true}
-                src={formik.errors.surname && formik.touched.surname?warning:success}
+                validate={
+                  formik.errors.surname && formik.touched.surname ? false : true
+                }
+                src={
+                  formik.errors.surname && formik.touched.surname
+                    ? warning
+                    : success
+                }
                 alt=""
               />
             )}
@@ -129,21 +154,23 @@ const PersonalForm = () => {
             ატვირთვა
           </label>
           <input
-            onChangeCapture={(e) => getImageBase64(e,setfile,formik)}
+            onChangeCapture={(e) => getImageBase64(e, setfile, formik)}
             onBlur={formik.handleBlur}
             value={undefined}
             name="image"
             type="file"
             id="upload-photo"
           />
-             {formik.touched.file && (
-              <ValidationIcon
+          {formik.touched.file && (
+            <ValidationIcon
               validate={true}
-              style={{top:5}}
-                src={formik.errors.file && formik.touched.file?warning:success}
-                alt=""
-              />
-            )}
+              style={{ top: 5 }}
+              src={
+                formik.errors.file && formik.touched.file ? warning : success
+              }
+              alt=""
+            />
+          )}
         </styled.FileUploadContainer>
         <styled.Label style={{ marginTop: "50px" }}>
           ჩემს შესახებ (არასავალდებულო)
@@ -168,15 +195,25 @@ const PersonalForm = () => {
             placeholder="anzori666@redberry.ge"
             width={"100%"}
             type="text"
-            border={formik.touched.email?formik.errors.email?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
+            border={
+              formik.touched.email
+                ? formik.errors.email
+                  ? "1px solid #EF5050"
+                  : "1px solid #98E37E"
+                : "2px solid #bcbcbc"
+            }
           />
-             {formik.touched.email && (
-              <ValidationIcon
-              validate={formik.errors.email && formik.touched.email?false:true}
-                src={formik.errors.email && formik.touched.email?warning:success}
-                alt=""
-              />
-            )}
+          {formik.touched.email && (
+            <ValidationIcon
+              validate={
+                formik.errors.email && formik.touched.email ? false : true
+              }
+              src={
+                formik.errors.email && formik.touched.email ? warning : success
+              }
+              alt=""
+            />
+          )}
           <styled.Requirements
             color={formik.errors.email && formik.touched.email && "red"}
           >
@@ -198,15 +235,29 @@ const PersonalForm = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder="+995 551 12 31 12"
-            border={formik.touched.phone_number?formik.errors.phone_number?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
+            border={
+              formik.touched.phone_number
+                ? formik.errors.phone_number
+                  ? "1px solid #EF5050"
+                  : "1px solid #98E37E"
+                : "2px solid #bcbcbc"
+            }
           />
-             {formik.touched.phone_number && (
-              <ValidationIcon
-              validate={formik.errors.phone_number && formik.touched.phone_number?false:true}
-                src={formik.errors.phone_number && formik.touched.phone_number?warning:success}
-                alt=""
-              />
-            )}
+          {formik.touched.phone_number && (
+            <ValidationIcon
+              validate={
+                formik.errors.phone_number && formik.touched.phone_number
+                  ? false
+                  : true
+              }
+              src={
+                formik.errors.phone_number && formik.touched.phone_number
+                  ? warning
+                  : success
+              }
+              alt=""
+            />
+          )}
           <styled.Requirements
             color={
               formik.errors.phone_number && formik.touched.phone_number && "red"
