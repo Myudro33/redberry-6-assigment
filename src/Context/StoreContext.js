@@ -225,7 +225,7 @@ const StoreContextProvider = (props) => {
     const response = await axios
       .post("https://resume.redberryinternship.ge/api/cvs", formData, config)
       .then((resp) => resp)
-      .catch((error) => alert(JSON.stringify(error.response.data.errors)));
+      .catch((error) => console.log(error));
     return response;
   };
 

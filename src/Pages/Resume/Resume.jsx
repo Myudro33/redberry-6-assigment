@@ -7,6 +7,7 @@ import { GrFormClose } from "react-icons/gr";
 import { FiAtSign } from "react-icons/fi";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import logo from '../../assets/LOGO-12 1.png'
+import 'animate.css';
 
 const Resume = () => {
   const { store,getDegreeFromId } = useContext(StoreContext);
@@ -66,10 +67,10 @@ const Resume = () => {
         <styled.AbsoluteImage src={logo} alt='logo' />
       </styled.Wrapper>
       {popUp && (
-        <styled.PopUpContainer>
+        <styled.PopUpContainer className="animate__animated animate__bounce" >
           <GrFormClose
             onClick={() => setpopUp(false)}
-            style={{ alignSelf: "flex-end", fontSize: "30px" }}
+            style={{ alignSelf: "flex-end", fontSize: "30px",cursor:'pointer' }}
           />
           <styled.PopUpTitle>რეზიუმე წარმატებით გაიგზავნა 🎉</styled.PopUpTitle>
         </styled.PopUpContainer>
