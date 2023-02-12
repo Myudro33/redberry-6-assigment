@@ -72,9 +72,7 @@ const PersonalForm = () => {
               type={"text"}
               placeholder="ანზორ"
               width={"371px"}
-              border={
-                formik.errors.name && formik.touched.name && "1px solid red"
-              }
+              border={formik.touched.name?formik.errors.name?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
             />
             {formik.touched.name && (
               <styled.ValidationIcon
@@ -102,11 +100,7 @@ const PersonalForm = () => {
               type={"text"}
               placeholder="მუმლაძე"
               width={"371px"}
-              border={
-                formik.errors.surname &&
-                formik.touched.surname &&
-                "1px solid red"
-              }
+              border={formik.touched.surname?formik.errors.surname?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
             />
                {formik.touched.surname && (
               <styled.ValidationIcon
@@ -171,9 +165,7 @@ const PersonalForm = () => {
             placeholder="anzori666@redberry.ge"
             width={"100%"}
             type="text"
-            border={
-              formik.errors.email && formik.touched.email && "1px solid red"
-            }
+            border={formik.touched.email?formik.errors.email?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
           />
              {formik.touched.email && (
               <styled.ValidationIcon
@@ -202,11 +194,7 @@ const PersonalForm = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder="+995 551 12 31 12"
-            border={
-              formik.errors.phone_number &&
-              formik.touched.phone_number &&
-              "1px solid red"
-            }
+            border={formik.touched.phone_number?formik.errors.phone_number?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
           />
              {formik.touched.phone_number && (
               <styled.ValidationIcon

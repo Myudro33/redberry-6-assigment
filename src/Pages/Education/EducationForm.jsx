@@ -6,7 +6,7 @@ import {
   MoreOptionsButton,
 } from "../../Components/GlobalStyledComponents";
 import { Link } from "react-router-dom";
-import EducationFormComponent from "../../Components/EducationFormComponent";
+import EducationFormComponent from "./EducationFormComponent";
 import { useNavigate } from "react-router-dom";
 import { StoreContext } from "../../Context/StoreContext";
 

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import * as styled from "../Pages/Experience/ExperienceStyled";
+import * as styled from "./ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { StoreContext } from "../Context/StoreContext";
-import warning from '../assets/warning.png'
-import success from '../assets/success.png'
+import { StoreContext } from "../../Context/StoreContext";
+import warning from '../../assets/warning.png'
+import success from '../../assets/success.png'
 
 const ExperienceFormComponent = ({index}) => {
   const { store, updateExpeiencesInfo } = useContext(StoreContext);
@@ -48,9 +48,7 @@ const ExperienceFormComponent = ({index}) => {
           width={"100%"}
           placeholder="დველოპერი, დიზაინერი, ა.შ"
           type={"text"}
-          border={
-            formik.errors.position && formik.touched.position && "1px solid red"
-          }
+          border={formik.touched.position?formik.errors.position?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
         />
            {formik.touched.position && (
               <styled.ValidationIcon
@@ -78,9 +76,7 @@ const ExperienceFormComponent = ({index}) => {
           width={"100%"}
           placeholder="დამსაქმებელი"
           type={"text"}
-          border={
-            formik.errors.employer && formik.touched.employer && "1px solid red"
-          }
+          border={formik.touched.employer?formik.errors.employer?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
         />
           {formik.touched.employer && (
               <styled.ValidationIcon
@@ -108,11 +104,7 @@ const ExperienceFormComponent = ({index}) => {
             onBlur={formik.handleBlur}
             width={"371px"}
             type={"date"}
-            border={
-              formik.errors.start_date &&
-              formik.touched.start_date &&
-              "1px solid red"
-            }
+            border={formik.touched.start_date?formik.errors.start_date?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
           />
         </styled.Label>
         <styled.Label
@@ -126,11 +118,7 @@ const ExperienceFormComponent = ({index}) => {
             onBlur={formik.handleBlur}
             width={"371px"}
             type={"date"}
-            border={
-              formik.errors.due_date &&
-              formik.touched.due_date &&
-              "1px solid red"
-            }
+            border={formik.touched.due_date?formik.errors.due_date?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
           />
         </styled.Label>
       </styled.DateContainer>
@@ -144,11 +132,7 @@ const ExperienceFormComponent = ({index}) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
-          error={
-            formik.errors.description &&
-            formik.touched.description &&
-            "1px solid red"
-          }
+          error={formik.touched.description?formik.errors.description?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
         />
           {formik.touched.description && (
               <styled.ValidationIcon

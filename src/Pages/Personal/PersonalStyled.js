@@ -108,7 +108,7 @@ export const Requirements = styled.p`
 export const Input = styled.input`
   height: 48px;
   width: ${(props) => props.width};
-  border: ${(props) => (props.border ? props.border : "1px solid #bcbcbc")};
+  border: ${props=>props.border||'2px solid #bcbcbc'};
   border-radius: 4px;
   padding: 10px;
   margin: 5px 0px;

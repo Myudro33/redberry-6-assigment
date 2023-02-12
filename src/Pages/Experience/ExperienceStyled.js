@@ -102,7 +102,7 @@ export const Textarea = styled.textarea`
   width: 100%;
   height: 103px;
   margin: 5px 0px;
-  border: ${(props) => (props.error ? props.error : "1px solid #bcbcbc")};
+  border: ${(props) => (props.error||'2px solid #bcbcbc')};
   resize: none;
   padding: 10px;
   border-radius: 4px;
@@ -144,7 +144,7 @@ export const ValidationIcon = styled.img`
 export const Input = styled.input`
   height: 48px;
   width: ${(props) => props.width};
-  border: ${(props) => (props.border ? "1px solid red" : "1px solid #bcbcbc")};
+  border: ${(props) => (props.border||'2px solid #bcbcbc')};
   border-radius: 4px;
   padding: 10px;
   margin: 5px 0px;

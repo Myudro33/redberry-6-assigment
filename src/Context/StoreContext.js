@@ -8,7 +8,7 @@ const initStore = {
   phone_number: "",
   experiences: [
     {
-      // id: 0,
+      id: 0,
       position: "",
       employer: "",
       start_date: "",
@@ -18,7 +18,7 @@ const initStore = {
   ],
   educations: [
     {
-      // id: 0,
+      id: 0,
       institute: "",
       due_date: "",
       description: "",

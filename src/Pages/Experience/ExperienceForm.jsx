@@ -6,7 +6,7 @@ import {
   Button,
   MoreOptionsButton,
 } from "../../Components/GlobalStyledComponents";
-import ExperienceFormComponent from "../../Components/ExperienceFormComponent";
+import ExperienceFormComponent from "./ExperienceFormComponent";
 import { StoreContext } from "../../Context/StoreContext";
 
 const ExperienceForm = () => {
