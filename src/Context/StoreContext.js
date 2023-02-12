@@ -211,20 +211,22 @@ const StoreContextProvider = (props) => {
     }
   };
   const submitForm = async () => {
-    formData.append("name", store.name);
-    formData.append("surname", store.surname);
-    formData.append("email", store.email);
-    formData.append("phone_number", store.phone_number);
-    formData.append("experiences", JSON.stringify(store.experiences));
-    formData.append("educations", JSON.stringify(store.educations));
-    formData.append("image", imageAsFile);
-    formData.append("about_me", store.about_me);
     const config = {
       headers: { "content-type": "multipart/form-data" },
     };
+   const data ={
+    name:store.name,
+    surname:store.surname,
+    email:store.email,
+    phone_number:store.phone_number,
+    experiences:store.experiences,
+    educations:store.educations,
+    image:imageAsFile,
+    about_me:store.about_me
+   }
     const response = await axios
-      .post("https://resume.redberryinternship.ge/api/cvs", formData, config)
-      .then((resp) => resp)
+      .post("https://resume.redberryinternship.ge/api/cvs", data, config)
+      .then((resp) => console.log(resp))
       .catch((error) => console.log(error));
     return response;
   };

@@ -72,7 +72,7 @@ const Resume = () => {
             onClick={() => setpopUp(false)}
             style={{ alignSelf: "flex-end", fontSize: "30px",cursor:'pointer' }}
           />
-          <styled.PopUpTitle>რეზიუმე წარმატებით არ გაიგზავნა :)🎉</styled.PopUpTitle>
+          <styled.PopUpTitle>რეზიუმე წარმატებით გაიგზავნა 🎉</styled.PopUpTitle>
         </styled.PopUpContainer>
       )}
     </styled.Container>
