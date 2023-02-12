@@ -4,7 +4,12 @@ import styled from "styled-components";
 
 
 
-
+export const ValidationIcon = styled.img`
+  width: 15px;
+  position: absolute;
+  right: ${(props)=>props.validate?'10px':'-30px'};
+  top: 40px;
+`;
 
 export const Select = styled.select`
   width: 371px;

@@ -134,13 +134,6 @@ export const Select = styled.select`
   border-radius: 4px;
   padding: 5px;
 `;
-
-export const ValidationIcon = styled.img`
-  width: 15px;
-  position: absolute;
-  right: 10px;
-  top: 40px;
-`;
 export const Input = styled.input`
   height: 48px;
   width: ${(props) => props.width};

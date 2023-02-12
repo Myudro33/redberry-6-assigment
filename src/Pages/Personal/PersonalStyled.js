@@ -91,14 +91,6 @@ export const FileUploadContainer = styled.div`
   align-items: center;
   position: relative;
 `;
-
-export const ValidationIcon = styled.img`
-  width: 15px;
-  position: absolute;
-  right: 10px;
-  top: 40px;
-`;
-
 export const Requirements = styled.p`
   color: ${(props) => (props.color ? props.color : "#2e2e2e")};
   font-weight: 300;

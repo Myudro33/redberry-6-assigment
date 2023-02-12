@@ -4,12 +4,13 @@ import * as styled from "../Experience/ExperienceStyled";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { StoreContext } from "../../Context/StoreContext";
-import warning from '../../assets/warning.png'
-import success from '../../assets/success.png'
+import warning from "../../assets/warning.png";
+import success from "../../assets/success.png";
+import { ValidationIcon } from "../../Components/GlobalStyledComponents";
 
 const EducationFormComponent = ({ index }) => {
   const [degrees, setdegrees] = useState();
-  const { store, updateEducationsInfo} = useContext(StoreContext);
+  const { store, updateEducationsInfo } = useContext(StoreContext);
   useEffect(() => {
     getDegrees(setdegrees);
   }, []);
@@ -37,7 +38,6 @@ const EducationFormComponent = ({ index }) => {
     updateEducationsInfo(formik.values, index);
   }, [formik.values]);
 
-
   return (
     <styled.Form>
       <styled.Label
@@ -52,14 +52,27 @@ const EducationFormComponent = ({ index }) => {
           type={"text"}
           width="100%"
           placeholder="სასწავლებელი"
-          border={formik.touched.institute?formik.errors.institute?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
+          border={
+            formik.touched.institute
+              ? formik.errors.institute
+                ? "1px solid #EF5050"
+                : "1px solid #98E37E"
+              : "2px solid #bcbcbc"
+          }
         />
-          {formik.touched.institute && (
-              <styled.ValidationIcon
-                src={formik.errors.institute && formik.touched.institute?warning:success}
-                alt=""
-              />
-            )}
+        {formik.touched.institute && (
+          <ValidationIcon
+            validate={
+              formik.errors.institute && formik.touched.institute ? false : true
+            }
+            src={
+              formik.errors.institute && formik.touched.institute
+                ? warning
+                : success
+            }
+            alt=""
+          />
+        )}
         <styled.Requirements
           color={formik.errors.institute && formik.touched.institute && "red"}
         >
@@ -78,9 +91,17 @@ const EducationFormComponent = ({ index }) => {
             name="degree_id"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.touched.degree_id?formik.errors.degree_id?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
+            error={
+              formik.touched.degree_id
+                ? formik.errors.degree_id
+                  ? "1px solid #EF5050"
+                  : "1px solid #98E37E"
+                : "2px solid #bcbcbc"
+            }
           >
-            <styled.Option selected disabled>აირჩიეთ ხარისხი</styled.Option>
+            <styled.Option selected disabled>
+              აირჩიეთ ხარისხი
+            </styled.Option>
             {degrees?.map((degree) => (
               <styled.Option key={degree.id} value={degree.title}>
                 {degree.title}
@@ -99,7 +120,13 @@ const EducationFormComponent = ({ index }) => {
             onBlur={formik.handleBlur}
             type={"date"}
             width="371px"
-            border={formik.touched.due_date?formik.errors.due_date?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
+            border={
+              formik.touched.due_date
+                ? formik.errors.due_date
+                  ? "1px solid #EF5050"
+                  : "1px solid #98E37E"
+                : "2px solid #bcbcbc"
+            }
           />
         </styled.Label>
       </styled.DateContainer>
@@ -114,14 +141,29 @@ const EducationFormComponent = ({ index }) => {
           onBlur={formik.handleBlur}
           style={{ height: "179px" }}
           placeholder="განათლების აღწერა"
-          error={formik.touched.description?formik.errors.description?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
+          error={
+            formik.touched.description
+              ? formik.errors.description
+                ? "1px solid #EF5050"
+                : "1px solid #98E37E"
+              : "2px solid #bcbcbc"
+          }
         />
-          {formik.touched.description && (
-              <styled.ValidationIcon
-                src={formik.errors.description && formik.touched.description?warning:success}
-                alt=""
-              />
-            )}
+        {formik.touched.description && (
+          <ValidationIcon
+            validate={
+              formik.errors.description && formik.touched.description
+                ? false
+                : true
+            }
+            src={
+              formik.errors.description && formik.touched.description
+                ? warning
+                : success
+            }
+            alt=""
+          />
+        )}
       </styled.Label>
       <styled.Hr />
     </styled.Form>

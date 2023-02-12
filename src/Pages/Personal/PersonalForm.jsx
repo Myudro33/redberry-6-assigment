@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as styled from "./PersonalStyled";
 import Navbar from "../../Components/Navbar";
-import { Button } from "../../Components/GlobalStyledComponents";
+import { Button,ValidationIcon } from "../../Components/GlobalStyledComponents";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -75,9 +75,10 @@ const PersonalForm = () => {
               border={formik.touched.name?formik.errors.name?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
             />
             {formik.touched.name && (
-              <styled.ValidationIcon
+              <ValidationIcon
+                validate={formik.errors.name && formik.touched.name?false:true}
                 src={formik.errors.name && formik.touched.name?warning:success}
-                alt=""
+                alt="validation"
               />
             )}
             <styled.Requirements
@@ -103,7 +104,8 @@ const PersonalForm = () => {
               border={formik.touched.surname?formik.errors.surname?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
             />
                {formik.touched.surname && (
-              <styled.ValidationIcon
+              <ValidationIcon
+              validate={formik.errors.surname && formik.touched.surname?false:true}
                 src={formik.errors.surname && formik.touched.surname?warning:success}
                 alt=""
               />
@@ -135,7 +137,8 @@ const PersonalForm = () => {
             id="upload-photo"
           />
              {formik.touched.file && (
-              <styled.ValidationIcon
+              <ValidationIcon
+              validate={true}
               style={{top:5}}
                 src={formik.errors.file && formik.touched.file?warning:success}
                 alt=""
@@ -168,7 +171,8 @@ const PersonalForm = () => {
             border={formik.touched.email?formik.errors.email?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
           />
              {formik.touched.email && (
-              <styled.ValidationIcon
+              <ValidationIcon
+              validate={formik.errors.email && formik.touched.email?false:true}
                 src={formik.errors.email && formik.touched.email?warning:success}
                 alt=""
               />
@@ -197,7 +201,8 @@ const PersonalForm = () => {
             border={formik.touched.phone_number?formik.errors.phone_number?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
           />
              {formik.touched.phone_number && (
-              <styled.ValidationIcon
+              <ValidationIcon
+              validate={formik.errors.phone_number && formik.touched.phone_number?false:true}
                 src={formik.errors.phone_number && formik.touched.phone_number?warning:success}
                 alt=""
               />

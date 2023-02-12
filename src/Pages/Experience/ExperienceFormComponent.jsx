@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { StoreContext } from "../../Context/StoreContext";
 import warning from '../../assets/warning.png'
 import success from '../../assets/success.png'
+import { ValidationIcon } from "../../Components/GlobalStyledComponents";
 
 const ExperienceFormComponent = ({index}) => {
   const { store, updateExpeiencesInfo } = useContext(StoreContext);
@@ -51,7 +52,8 @@ const ExperienceFormComponent = ({index}) => {
           border={formik.touched.position?formik.errors.position?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
         />
            {formik.touched.position && (
-              <styled.ValidationIcon
+              <ValidationIcon
+              validate={formik.errors.position && formik.touched.position?false:true}
                 src={formik.errors.position && formik.touched.position?warning:success}
                 alt=""
               />
@@ -79,7 +81,8 @@ const ExperienceFormComponent = ({index}) => {
           border={formik.touched.employer?formik.errors.employer?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
         />
           {formik.touched.employer && (
-              <styled.ValidationIcon
+              <ValidationIcon
+              validate={formik.errors.employer && formik.touched.employer?false:true}
                 src={formik.errors.employer && formik.touched.employer?warning:success}
                 alt=""
               />
@@ -135,7 +138,8 @@ const ExperienceFormComponent = ({index}) => {
           error={formik.touched.description?formik.errors.description?'1px solid #EF5050':'1px solid #98E37E':'2px solid #bcbcbc'}
         />
           {formik.touched.description && (
-              <styled.ValidationIcon
+              <ValidationIcon
+              validate={formik.errors.description && formik.touched.description?false:true}
                 src={formik.errors.description && formik.touched.description?warning:success}
                 alt=""
               />
