@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/redberry-6-assigment/static/css/main.af441ce6.css",
+    "main.js": "/redberry-6-assigment/static/js/main.4b1bd12f.js",
+    "static/media/HelveticaNeue.ttc": "/redberry-6-assigment/static/media/HelveticaNeue.67d426c3bd180e2ea838.ttc",
+    "static/media/background-logo.png": "/redberry-6-assigment/static/media/background-logo.000891862a9bfe5affa5.png",
+    "index.html": "/redberry-6-assigment/index.html",
+    "main.af441ce6.css.map": "/redberry-6-assigment/static/css/main.af441ce6.css.map",
+    "main.4b1bd12f.js.map": "/redberry-6-assigment/static/js/main.4b1bd12f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.af441ce6.css",
+    "static/js/main.4b1bd12f.js"
+  ]
+}
