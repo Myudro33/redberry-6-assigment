@@ -28,8 +28,8 @@ const initStore = {
   image: "",
   about_me: "",
   file: "",
+  response: "",
 };
-const formData = new FormData();
 const getInitialState = () => {
   const store = localStorage.getItem("store");
   return store ? JSON.parse(store) : initStore;
@@ -127,7 +127,6 @@ const StoreContextProvider = (props) => {
       return newStore;
     });
   };
-
   const setPersonalInfo = (info) => {
     setstore((prev) => {
       const newStore = {
@@ -158,11 +157,11 @@ const StoreContextProvider = (props) => {
   const getFileFromBase64 = async () => {
     if (store.image !== "") {
       const newFile = await urltoFile(store.image, "CV image", "image/png");
-       setimageAsFile(newFile)
+      setimageAsFile(newFile);
     }
   };
   useEffect(() => {
-    getFileFromBase64()
+    getFileFromBase64();
   }, [store]);
 
   const getDegreeFromId = (id) => {
@@ -188,7 +187,6 @@ const StoreContextProvider = (props) => {
       return "";
     }
   };
-
   const getDegreeId = (degree) => {
     if (degree === "საშუალო სკოლის დიპლომი") {
       return 1;
@@ -214,38 +212,41 @@ const StoreContextProvider = (props) => {
     const config = {
       headers: { "content-type": "multipart/form-data" },
     };
-   const data ={
-    name:store.name,
-    surname:store.surname,
-    email:store.email,
-    phone_number:store.phone_number,
-    experiences:store.experiences,
-    educations:store.educations,
-    image:imageAsFile,
-    about_me:store.about_me
-   }
+    const data = {
+      name: store.name,
+      surname: store.surname,
+      email: store.email,
+      phone_number: store.phone_number,
+      experiences: store.experiences,
+      educations: store.educations,
+      image: imageAsFile,
+      about_me: store.about_me,
+    };
     const response = await axios
       .post("https://resume.redberryinternship.ge/api/cvs", data, config)
-      .then((resp) => console.log(resp))
+      .then((resp) => setstore({ ...store, response: resp.data }))
       .catch((error) => console.log(error));
-    return response;
   };
 
-const getImageBase64 = (e,setfile,formik) =>{
-  const objectUrl = URL.createObjectURL(
-    new Blob([e.target.files[0]], { type: "image/png" })
-  );
-  setfile(objectUrl);
-  formik.initialValues.file = objectUrl;
-  setstore({...store,file:objectUrl})
-  const selectedFile = e.target.files[0]
-  const reader = new FileReader();
-  reader.onloadend = () =>{
-    setstore({...store,image:reader.result.toString()})
-  }
-  reader.readAsDataURL(selectedFile)
-  return () => URL.revokeObjectURL(objectUrl);
-}
+  const getImageBase64 = (e, setfile, formik) => {
+    if (e.target.files[0].size < 1000000) {
+      const objectUrl = URL.createObjectURL(
+        new Blob([e.target.files[0]], { type: "image/png" })
+      );
+      setfile(objectUrl);
+      formik.initialValues.file = objectUrl;
+      setstore({ ...store, file: objectUrl });
+      const selectedFile = e.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setstore({ ...store, image: reader.result.toString() });
+      };
+      reader.readAsDataURL(selectedFile);
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      alert("ფოტო უნდა იყოს 1მბ-ზე ნაკლები");
+    }
+  };
   return (
     <StoreContext.Provider
       value={{
@@ -260,7 +261,7 @@ const getImageBase64 = (e,setfile,formik) =>{
         getDegreeId,
         submitForm,
         getDegreeFromId,
-        getImageBase64
+        getImageBase64,
       }}
     >
       {props.children}
