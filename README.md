@@ -20,8 +20,8 @@ Users should be able to:
 
 ### What I learned
 
-= Formik & Yup
-= useContext
+- Formik & Yup
+- useContext
 - LocalStorage
 
 ## Author
