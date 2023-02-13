@@ -1,19 +1,7 @@
 @font-face {
-  font-family: 'HelveticaNeue';
-  src: url(/src/assets/fonts/HelveticaNeue.ttc) format('truetype');
-  font-weight: 400;
+  font-family: "HelveticaNeue";
+  src: url(/src/assets/fonts/HelveticaNeue.ttc);
 }
-@font-face {
-  font-family: 'HelveticaNeue';
-  src: url(/src/assets/fonts/HelveticaNeue.ttc) format('truetype');
-  font-weight: 500;
-}
-@font-face {
-  font-family: HelveticaNeue;
-  src: url(/src/assets/fonts/HelveticaNeue.ttc) format('truetype');
-  font-weight: bolder;
-}
-
 #label {
   cursor: pointer;
   width: 107px;
@@ -32,13 +20,11 @@
   position: absolute;
   z-index: -1;
 }
-
-
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: HelveticaNeue;
+  font-family: "HelveticaNeue";
 }
 ::-webkit-scrollbar{
   display: none;

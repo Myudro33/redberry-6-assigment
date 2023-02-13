@@ -14,6 +14,7 @@ import success from "../../assets/success.png";
 const PersonalForm = () => {
   const { setPersonalInfo, store, getImageBase64 } = useContext(StoreContext);
   const [file, setfile] = useState(store.file);
+  const [fileError, setfileError] = useState('პირადი ფოტოს ატვირთვა')
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -53,10 +54,12 @@ const PersonalForm = () => {
   useEffect(() => {
     setPersonalInfo(formik.values);
   }, [formik.values]);
+  // ლაივ რეჟიმში ინფუთების value გადააქვს cv კომპონენტში
   useEffect(() => {
     formik.values.file = file;
     setPersonalInfo(formik.initialValues);
   }, [file, formik.initialValues]);
+
 
   return (
     <styled.LeftContainer>
@@ -148,13 +151,13 @@ const PersonalForm = () => {
           <styled.FileTitle
             error={formik.errors.file && formik.touched.file && "red"}
           >
-            პირადი ფოტოს ატვირთვა
+            {fileError}
           </styled.FileTitle>
           <label id="label" htmlFor="upload-photo">
             ატვირთვა
           </label>
           <input
-            onChangeCapture={(e) => getImageBase64(e, setfile, formik)}
+            onChangeCapture={(e) => getImageBase64(e, setfile, formik,setfileError)}
             onBlur={formik.handleBlur}
             value={undefined}
             name="image"

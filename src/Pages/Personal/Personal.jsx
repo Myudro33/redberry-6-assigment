@@ -7,8 +7,7 @@ const Personal = () => {
 
   return (
     <styled.Container>
-      <PersonalForm
-      />
+      <PersonalForm/>
       <Resume />
     </styled.Container>
   );

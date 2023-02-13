@@ -48,6 +48,8 @@ const StoreContextProvider = (props) => {
   const clearLocalStorage = () => {
     setstore(initStore);
   };
+
+  // ანახლებს გამოცდილების გვერდზე შეყვანილ ინფოებს ლოკალში
   const updateExpeiencesInfo = (info, index) => {
     setstore((prev) => {
       const newStore = store.experiences.map((obj) => {
@@ -68,6 +70,7 @@ const StoreContextProvider = (props) => {
     localStorage.setItem("store", JSON.stringify(store));
   };
 
+  // ანახლებს განათლების გვერდზე შეყვანილ ინფოებს ლოკალში
   const updateEducationsInfo = (info, index) => {
     setstore((prev) => {
       const newStore = store.educations.map((obj) => {
@@ -87,6 +90,7 @@ const StoreContextProvider = (props) => {
     localStorage.setItem("store", store);
   };
 
+  // ამატებს +1 ფორმას გამოცდილების გვერდზე
   const setExperienceInfo = () => {
     setstore((prev) => {
       const newStore = {
@@ -107,7 +111,7 @@ const StoreContextProvider = (props) => {
       return newStore;
     });
   };
-
+//  ამატებს +1 ფორმას განათლების გვერდზე
   const setEducationsInfo = () => {
     setstore((prev) => {
       const newStore = {
@@ -127,6 +131,8 @@ const StoreContextProvider = (props) => {
       return newStore;
     });
   };
+
+  // ინახავს ლოკალში პერსონალურ ინფოს
   const setPersonalInfo = (info) => {
     setstore((prev) => {
       const newStore = {
@@ -144,6 +150,8 @@ const StoreContextProvider = (props) => {
     });
   };
 
+
+  // base64 convert into image file
   function urltoFile(url, filename, mimeType) {
     return fetch(url)
       .then(function (res) {
@@ -164,6 +172,8 @@ const StoreContextProvider = (props) => {
     getFileFromBase64();
   }, [store]);
 
+
+  // იღებს ხარისხის დასახელებას id-ით
   const getDegreeFromId = (id) => {
     if (id === 1) {
       return "საშუალო სკოლის დიპლომი";
@@ -187,6 +197,8 @@ const StoreContextProvider = (props) => {
       return "";
     }
   };
+
+  // იღებს id-s ხარისხის დასახელებიდან
   const getDegreeId = (degree) => {
     if (degree === "საშუალო სკოლის დიპლომი") {
       return 1;
@@ -208,6 +220,10 @@ const StoreContextProvider = (props) => {
       return 9;
     }
   };
+
+
+
+  // აგზავნის დათას api-ზე
   const submitForm = async () => {
     const config = {
       headers: { "content-type": "multipart/form-data" },
@@ -228,7 +244,9 @@ const StoreContextProvider = (props) => {
       .catch((error) => console.log(error));
   };
 
-  const getImageBase64 = (e, setfile, formik) => {
+
+  // იღებს ინფუთის value-დან base64 სტრინგს და ინახავს ლოკალში
+  const getImageBase64 = (e, setfile, formik,setfileError) => {
     if (e.target.files[0].size < 1000000) {
       const objectUrl = URL.createObjectURL(
         new Blob([e.target.files[0]], { type: "image/png" })
@@ -244,7 +262,7 @@ const StoreContextProvider = (props) => {
       reader.readAsDataURL(selectedFile);
       return () => URL.revokeObjectURL(objectUrl);
     } else {
-      alert("ფოტო უნდა იყოს 1მბ-ზე ნაკლები");
+      setfileError("Photo must be less than 1mb");
     }
   };
   return (

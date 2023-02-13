@@ -14,6 +14,7 @@ const EducationForm = () => {
   const navigate = useNavigate();
   const { store, setEducationsInfo,submitForm } = useContext(StoreContext);
   const handleSubmit = () => {
+// ამოწმებს გვერდზე ყველა ინფუთს რომ არიყოს ცარიელი
     const ValuesNotEmpty = store.educations.every((obj)=>{
       return Object.values(obj).every(val=>val!=="")
     })

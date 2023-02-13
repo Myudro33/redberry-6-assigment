@@ -28,7 +28,7 @@ const Resume = () => {
       <styled.NavigateHomeWrapper onClick={() => navigate("/")}>
         <img src={vector} alt="" />
       </styled.NavigateHomeWrapper>
-      {store.response && (
+      {store.response&&(
         <styled.Wrapper>
           <styled.PersonalContainer>
             <styled.PersonalLeft>
